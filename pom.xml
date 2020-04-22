@@ -19,6 +19,7 @@
 		<module>boot-core</module>
 		<module>boot-starter-web</module>
 		<module>boot-starter-jwt</module>
+		<module>boot-starter-redis</module>
 	</modules>
 
 	<properties>
