@@ -25,7 +25,6 @@ import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.time.Duration;
 
-@Profile(value = "redis")
 @Configuration
 @EnableCaching
 public class RedisConfig  extends CachingConfigurerSupport {
@@ -48,7 +47,8 @@ public class RedisConfig  extends CachingConfigurerSupport {
         反解析就会报com.alibaba.fastjson.JSONException: autoType is not support的异常
         可参考 https://blog.csdn.net/u012240455/article/details/80538540
          */
-//        ParserConfig.getGlobalInstance().addAccept("zmc.leon.mcd.entity.");
+        ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
+//        ParserConfig.getGlobalInstance().addAccept("com.github.tanxinzheng.");
         return builder.build();
     }
 
@@ -87,7 +87,7 @@ public class RedisConfig  extends CachingConfigurerSupport {
 
     @Bean(name = "redisTemplate")
     @ConditionalOnMissingBean(name = "redisTemplate")
-    public RedisTemplate<Object, Object> redisTemplate(LettuceConnectionFactory connectionFactory) {
+    public RedisTemplate<Object, Object> redisTemplate() {
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
         //使用fastjson序列化
         FastJsonRedisSerializer fastJsonRedisSerializer = new FastJsonRedisSerializer(Object.class);
@@ -97,7 +97,7 @@ public class RedisConfig  extends CachingConfigurerSupport {
         // key的序列化采用StringRedisSerializer
         template.setKeySerializer(new StringRedisSerializer());
         template.setHashKeySerializer(new StringRedisSerializer());
-        template.setConnectionFactory(connectionFactory);
+        template.setConnectionFactory(lettuceConnectionFactory);
         return template;
     }
 

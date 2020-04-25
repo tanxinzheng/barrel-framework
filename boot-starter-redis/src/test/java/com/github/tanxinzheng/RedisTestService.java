@@ -5,9 +5,9 @@ import org.springframework.cache.annotation.Cacheable;
 
 public interface RedisTestService {
 
-    @Cacheable(key="'user_'+#id",value="'user'+#id")
+    @Cacheable(cacheNames = {"user"}, key="'user_'+#id")
     DemoDTO getUser(String id);
 
-    @CacheEvict(key="'user_'+#id", value="users", condition="#id!=1")
+    @CacheEvict(cacheNames = {"user"}, key="'user_'+#id")
     void deleteUser(String id);
 }
