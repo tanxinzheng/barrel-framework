@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.tanxinzheng</groupId>
-	<artifactId>boot-parent</artifactId>
+	<artifactId>boot-framework</artifactId>
 	<version>1.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>boot-parent</name>
-	<description>Boot Parent</description>
+	<name>boot-framework</name>
+	<description>Boot Framework</description>
 
 	<modules>
 		<module>boot-core</module>
