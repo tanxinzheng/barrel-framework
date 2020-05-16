@@ -10,7 +10,6 @@
          p.id,
          p.PERMISSION_URL,
          p.PERMISSION_KEY,
-         p.PERMISSION_GROUP,
          p.PERMISSION_ACTION,
          p.DESCRIPTION
         FROM

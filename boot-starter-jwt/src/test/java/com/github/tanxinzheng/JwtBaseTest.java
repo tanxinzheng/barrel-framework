@@ -10,6 +10,8 @@ import com.github.tanxinzheng.jwt.support.TokenType;
 import org.assertj.core.util.Lists;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,5 +93,11 @@ public class JwtBaseTest {
                 return execution.execute(requestWrapper, body);
             }
         }));
+    }
+
+    @Ignore
+    @Test
+    public void test(){
+
     }
 }

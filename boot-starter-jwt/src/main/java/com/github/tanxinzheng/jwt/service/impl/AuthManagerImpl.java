@@ -20,7 +20,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import javax.annotation.Resources;
 import java.util.List;
 import java.util.Set;
 

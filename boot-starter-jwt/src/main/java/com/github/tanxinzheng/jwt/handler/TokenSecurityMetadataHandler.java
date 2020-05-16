@@ -1,16 +1,13 @@
 package com.github.tanxinzheng.jwt.handler;
 
-import com.github.tanxinzheng.framework.core.service.CurrentUserService;
 import com.github.tanxinzheng.jwt.access.PermissionGrantedAuthority;
 import com.github.tanxinzheng.jwt.dao.entity.PermissionAction;
 import com.github.tanxinzheng.jwt.dao.entity.PermissionDO;
 import com.github.tanxinzheng.jwt.dao.mapper.AuthPermissionMapper;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 import java.util.List;

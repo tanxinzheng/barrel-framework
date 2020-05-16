@@ -2,6 +2,8 @@ package com.github.tanxinzheng.cache.config;
 
 import com.alibaba.fastjson.parser.ParserConfig;
 import com.github.tanxinzheng.cache.serializer.FastJsonRedisSerializer;
+import io.lettuce.core.internal.HostAndPort;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.CacheManager;
@@ -11,11 +13,8 @@ import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.cache.RedisCacheWriter;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
@@ -24,6 +23,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.time.Duration;
+import java.util.HashSet;
+import java.util.Set;
 
 @Configuration
 @EnableCaching
@@ -48,7 +49,6 @@ public class RedisConfig  extends CachingConfigurerSupport {
         可参考 https://blog.csdn.net/u012240455/article/details/80538540
          */
         ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
-//        ParserConfig.getGlobalInstance().addAccept("com.github.tanxinzheng.");
         return builder.build();
     }
 

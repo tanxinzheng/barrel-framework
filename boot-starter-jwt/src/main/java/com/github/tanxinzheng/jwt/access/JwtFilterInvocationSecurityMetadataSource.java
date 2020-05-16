@@ -1,7 +1,5 @@
 package com.github.tanxinzheng.jwt.access;
 
-import com.github.tanxinzheng.framework.core.service.CurrentUserService;
-import com.github.tanxinzheng.jwt.config.JwtConfigProperties;
 import com.github.tanxinzheng.jwt.handler.SecurityMetadataHandler;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
