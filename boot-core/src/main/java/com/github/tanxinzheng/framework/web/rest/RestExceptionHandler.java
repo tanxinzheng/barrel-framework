@@ -9,6 +9,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.binding.BindingException;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,12 +38,12 @@ import java.util.List;
 @ControllerAdvice
 public class RestExceptionHandler {
 
-    private static final Log logger = LogFactory.getLog(RestExceptionHandler.class);
-
 //    @Value(value = "${spring.servlet.multipart.max-file-size}")
     private Long maxUploadSize = 102400l;
 
+
     @ExceptionHandler(value = {
+            RuntimeException.class,
             BusinessException.class,
             AccessDeniedException.class,
             MethodArgumentNotValidException.class
@@ -76,7 +78,7 @@ public class RestExceptionHandler {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
             restError.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
             restError.setMessage("系统异常，请联系管理员，异常事件编号：" + eventNo);
-            logger.error("Event No: " + eventNo + " -> " + ex.getMessage(), ex);
+            log.error("Event No: " + eventNo + " -> " + ex.getMessage(), ex);
         }
         return restError;
     }

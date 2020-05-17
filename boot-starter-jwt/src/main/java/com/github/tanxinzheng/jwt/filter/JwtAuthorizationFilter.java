@@ -41,11 +41,12 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         if (authHeader != null && authHeader.startsWith(TokenType.BEARER.getCode())) {
             String authToken = authHeader.substring(TokenType.BEARER.getCode().length() + 1);// The part after "Bearer "
             if (!jwtUtils.validateToken(authToken)) {
-                throw new BadCredentialsException("无效的access token");
+                throw new BadCredentialsException("the access token is invalid.");
             } else {
                 String username = jwtUtils.getUsernameByToken(authToken);
                 JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(authToken);
                 jwtAuthenticationProvider.authenticate(authenticationToken);
+                request.setAttribute("username", username);
                 log.info("authenticated user: {}, roles: {}", username, authenticationToken.getAuthorities());
             }
         }

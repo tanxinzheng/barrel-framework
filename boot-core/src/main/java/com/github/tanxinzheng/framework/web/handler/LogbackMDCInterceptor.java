@@ -1,5 +1,6 @@
 package com.github.tanxinzheng.framework.web.handler;
 
+import com.github.tanxinzheng.framework.utils.UUIDGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
@@ -18,7 +19,7 @@ public class LogbackMDCInterceptor extends HandlerInterceptorAdapter {
     /**
      * 会话ID
      */
-    private final static String USERNAME = "userId";
+    private final static String USERNAME = "username";
     private final static String REQUEST_ID = "requestId";
 
     @Override
@@ -38,10 +39,17 @@ public class LogbackMDCInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
-        if(request.getUserPrincipal() != null && StringUtils.isNotBlank(request.getUserPrincipal().getName())){
-            MDC.put(USERNAME, request.getUserPrincipal().getName());
+        String username = (String) request.getAttribute(USERNAME);
+        String requestId = UUIDGenerator.getInstance().getUUID();
+        if(StringUtils.isNotBlank(username)){
+            MDC.put(USERNAME, username);
         }else{
             MDC.put(USERNAME, "-");
+        }
+        if(StringUtils.isNotBlank(requestId)){
+            MDC.put(REQUEST_ID, requestId);
+        }else{
+            MDC.put(REQUEST_ID, "-");
         }
         return true;
     }

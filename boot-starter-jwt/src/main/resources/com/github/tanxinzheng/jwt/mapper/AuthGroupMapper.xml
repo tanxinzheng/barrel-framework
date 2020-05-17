@@ -15,7 +15,7 @@
         WHERE
             ug.GROUP_ID = g.ID
             AND ug.USER_ID = u.ID
-            AND u.DISABLE = 0
+            AND u.LOCKED = 0
             AND u.ID = #{userId}
     </select>
 

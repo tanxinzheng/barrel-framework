@@ -5,6 +5,8 @@ import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -116,14 +118,15 @@ public class JwtUtils {
                     .setSigningKey(jwtConfigProperties.getSecret())
                     .parseClaimsJws(token)
                     .getBody();
-        } catch (ExpiredJwtException
-                | UnsupportedJwtException
-                | MalformedJwtException
-                | SignatureException
-                | IllegalArgumentException ex) {
-            log.info(ex.getMessage(), ex);
-        } catch (Exception e) {
-            log.info("token验证失败: {}",token);
+        } catch (UnsupportedJwtException ex) {
+            log.error("token验证失败: {}", token);
+            log.error(ex.getMessage(), ex);
+        } catch (SignatureException | MalformedJwtException se){
+            log.error(se.getMessage(), se);
+            throw new BadCredentialsException("the access token is illegal, signature parsing fail.");
+        } catch (ExpiredJwtException e){
+            log.error(e.getMessage(), e);
+            throw new BadCredentialsException("the access token is expired.");
         }
         return claims;
     }

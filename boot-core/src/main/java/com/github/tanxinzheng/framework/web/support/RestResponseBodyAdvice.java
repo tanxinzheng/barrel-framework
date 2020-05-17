@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.Page;
 import com.github.tanxinzheng.framework.web.model.RestResponse;
 import org.springframework.core.MethodParameter;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
@@ -19,7 +18,7 @@ import java.util.Arrays;
 /**
  * Created by Jeng on 2016/1/21.
  */
-@ControllerAdvice
+//@ControllerAdvice
 public class RestResponseBodyAdvice implements ResponseBodyAdvice {
 
     private ThreadLocal<ObjectMapper>  mapperThreadLocal = ThreadLocal.withInitial(ObjectMapper::new);
@@ -81,9 +80,6 @@ public class RestResponseBodyAdvice implements ResponseBodyAdvice {
                 return restResponse.getData();
             }
             return body;
-        }else if(body instanceof Page){
-            Page page = (Page) body;
-            return RestResponse.success(page.toPageInfo(), page.getResult());
         }
         return RestResponse.success(body);
     }
