@@ -8,6 +8,7 @@ import com.github.tanxinzheng.framework.web.handler.LogbackMDCInterceptor;
 import com.github.tanxinzheng.framework.web.json.CustomDateDeserialize;
 import com.github.tanxinzheng.framework.web.support.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -97,6 +98,11 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         registry.enableContentNegotiation(false, new MappingJackson2JsonView());
         registry.enableContentNegotiation(new MappingJackson2JsonView());
+    }
+
+    @Bean
+    public ErrorProperties errorProperties(){
+        return new ErrorProperties();
     }
 
     @Override

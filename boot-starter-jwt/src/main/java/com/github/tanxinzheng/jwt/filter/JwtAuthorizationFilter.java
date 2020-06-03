@@ -1,12 +1,26 @@
 package com.github.tanxinzheng.jwt.filter;
 
+import com.github.tanxinzheng.framework.exception.ErrorCode;
+import com.github.tanxinzheng.framework.web.model.RestResponse;
 import com.github.tanxinzheng.jwt.config.JwtConfigProperties;
+import com.github.tanxinzheng.jwt.exception.AuthErrorCode;
 import com.github.tanxinzheng.jwt.support.JwtAuthenticationProvider;
 import com.github.tanxinzheng.jwt.support.JwtAuthenticationToken;
 import com.github.tanxinzheng.jwt.support.JwtUtils;
 import com.github.tanxinzheng.jwt.support.TokenType;
+import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -24,7 +38,6 @@ import java.io.IOException;
 @Slf4j
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
-
     @Resource
     private JwtAuthenticationProvider jwtAuthenticationProvider;
     @Resource
@@ -36,20 +49,22 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain chain) throws ServletException, IOException {
-        log.debug(request.getRequestURI());
         String authHeader = request.getHeader(jwtConfigProperties.getTokenHeaderName());
-        if (authHeader != null && authHeader.startsWith(TokenType.BEARER.getCode())) {
-            String authToken = authHeader.substring(TokenType.BEARER.getCode().length() + 1);// The part after "Bearer "
-            if (!jwtUtils.validateToken(authToken)) {
-                throw new BadCredentialsException("the access token is invalid.");
-            } else {
-                String username = jwtUtils.getUsernameByToken(authToken);
-                JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(authToken);
-                jwtAuthenticationProvider.authenticate(authenticationToken);
-                request.setAttribute("username", username);
-                log.info("authenticated user: {}, roles: {}", username, authenticationToken.getAuthorities());
-            }
+        if (authHeader == null || !authHeader.startsWith(TokenType.BEARER.getCode())) {
+            chain.doFilter(request, response);
+            return;
         }
-        chain.doFilter(request, response);
+        String authToken = authHeader.substring(TokenType.BEARER.getCode().length() + 1);// The part after "Bearer "
+        try{
+            String username = jwtUtils.getUsernameByToken(authToken);
+            JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(authToken);
+            jwtAuthenticationProvider.authenticate(authenticationToken);
+            log.info("authenticated user: {}, roles: {}", username, authenticationToken.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            chain.doFilter(request, response);
+        }catch (JwtException e){
+            RestResponse.failed(AuthErrorCode.UNAUTHORIZED, e).toJSON(request, response, HttpStatus.UNAUTHORIZED);
+            return;
+        }
     }
 }

@@ -76,11 +76,13 @@ public class JwtUtils {
      * @return
      */
     public String getUsernameByToken(String token){
-        String  subject = Jwts.parser()
+        if(!validateToken(token)){
+            return null;
+        }
+        return Jwts.parser()
                     .setSigningKey(jwtConfigProperties.getSecret())
                     .parseClaimsJws(token)
                     .getBody().getSubject();
-        return subject;
     }
 
     /**
@@ -121,12 +123,13 @@ public class JwtUtils {
         } catch (UnsupportedJwtException ex) {
             log.error("token验证失败: {}", token);
             log.error(ex.getMessage(), ex);
+            throw new JwtException("the access token is illegal, signature parsing fail.");
         } catch (SignatureException | MalformedJwtException se){
             log.error(se.getMessage(), se);
-            throw new BadCredentialsException("the access token is illegal, signature parsing fail.");
+            throw new JwtException("the access token is illegal, signature parsing fail.");
         } catch (ExpiredJwtException e){
             log.error(e.getMessage(), e);
-            throw new BadCredentialsException("the access token is expired.");
+            throw new JwtException("the access token is expired.");
         }
         return claims;
     }
