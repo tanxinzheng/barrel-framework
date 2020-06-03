@@ -29,8 +29,6 @@ public class AuthManagerImpl implements CurrentUserService, UserDetailsService {
     @Resource
     AuthMapper authMapper;
     @Resource
-    AuthPermissionMapper authPermissionMapper;
-    @Resource
     AuthGroupMapper authGroupMapper;
 
     @Override

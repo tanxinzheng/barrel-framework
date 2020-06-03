@@ -1,6 +1,7 @@
 package com.github.tanxinzheng.jwt.exception;
 
 import com.github.tanxinzheng.framework.web.model.RestResponse;
+import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,7 @@ import java.nio.file.AccessDeniedException;
 public class AuthExceptionHandler {
 
     @ExceptionHandler(value = {
+            JwtException.class,
             UsernameNotFoundException.class,
             BadCredentialsException.class,
             AccessDeniedException.class,
@@ -41,6 +43,9 @@ public class AuthExceptionHandler {
         }else if(ex instanceof AccessDeniedException){
             response.setStatus(HttpStatus.FORBIDDEN.value());
             restError.setStatus(HttpStatus.FORBIDDEN.value());
+        }else if(ex instanceof JwtException){
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            restError.setStatus(HttpStatus.UNAUTHORIZED.value());
         }
         restError.setError(ex.getMessage());
         restError.setCode(String.valueOf(restError.getStatus()));

@@ -77,6 +77,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return data;
     }
 
+    @Bean
+    public RestAuthenticationEntryPoint getRestAuthenticationEntryPoint(){
+        return new RestAuthenticationEntryPoint();
+    }
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
@@ -95,9 +100,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS)//跨域请求会先进行一次options请求
                 .permitAll()
-                // 对于获取token的rest api要允许匿名访问
-                .antMatchers(getStaticResourcesUrl())
-                .permitAll()
                 .anyRequest().authenticated()
                 // 用于动态URL权限控制
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
@@ -114,7 +116,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .and()
                 .exceptionHandling()
-                    .authenticationEntryPoint(new RestAuthenticationEntryPoint())
+                    .authenticationEntryPoint(getRestAuthenticationEntryPoint())
                     .accessDeniedHandler(new TokenAccessDeniedHandler()) // 访问未授权资源异常处理
                 .and()
                 // 禁用缓存

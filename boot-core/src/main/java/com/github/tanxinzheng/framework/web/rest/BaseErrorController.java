@@ -1,6 +1,7 @@
 package com.github.tanxinzheng.framework.web.rest;
 
 import com.github.tanxinzheng.framework.web.model.RestResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
@@ -31,6 +32,7 @@ public class BaseErrorController extends AbstractErrorController {
      * @param errorAttributes the error attributes
      * @param errorProperties configuration properties
      */
+    @Autowired
     public BaseErrorController(ErrorAttributes errorAttributes, ErrorProperties errorProperties) {
         this(errorAttributes, errorProperties, Collections.emptyList());
     }
@@ -42,7 +44,7 @@ public class BaseErrorController extends AbstractErrorController {
      * @param errorViewResolvers error view resolvers
      */
     public BaseErrorController(ErrorAttributes errorAttributes, ErrorProperties errorProperties,
-                                List<ErrorViewResolver> errorViewResolvers) {
+                               List<ErrorViewResolver> errorViewResolvers) {
         super(errorAttributes, errorViewResolvers);
         Assert.notNull(errorProperties, "ErrorProperties must not be null");
         this.errorProperties = errorProperties;
@@ -70,7 +72,9 @@ public class BaseErrorController extends AbstractErrorController {
             return new ResponseEntity<RestResponse>(status);
         }
         Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request, MediaType.ALL));
-        return new ResponseEntity<>(RestResponse.failed(status, (String) body.get("message")), status);
+        RestResponse restResponse = RestResponse.failed(status, (String) body.get("message"));
+        restResponse.setError((String) body.get("error"));
+        return new ResponseEntity<>(restResponse, status);
     }
 
     /**

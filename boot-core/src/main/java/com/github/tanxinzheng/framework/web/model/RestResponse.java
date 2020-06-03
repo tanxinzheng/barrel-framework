@@ -28,7 +28,6 @@ import java.util.List;
 @Data
 public class RestResponse<T> implements Serializable {
 
-//    private PageInfo pageInfo;
     private String code;
     private String timestamp;
     private Integer status;
@@ -57,12 +56,6 @@ public class RestResponse<T> implements Serializable {
         restResponse.setCode(String.valueOf(HttpStatus.OK.value()));
         return restResponse;
     }
-
-//    public static RestResponse success(PageInfo pageInfo, List data) {
-//        RestResponse restResponse = RestResponse.success(data);
-//        restResponse.setPageInfo(pageInfo);
-//        return restResponse;
-//    }
 
     public static RestResponse failed(ErrorCode errorCode) {
         return failed(errorCode, null);
@@ -107,13 +100,14 @@ public class RestResponse<T> implements Serializable {
     }
 
     public void toJSON(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        toJSON(request, response, HttpStatus.OK);
+        toJSON(request, response, HttpStatus.valueOf(this.status));
     }
 
     public void toJSON(HttpServletRequest request, HttpServletResponse response, HttpStatus httpStatus) throws IOException {
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding("UTF-8");
         response.setStatus(httpStatus.value());
+        this.status = httpStatus.value();
         OutputStream out = response.getOutputStream();
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
