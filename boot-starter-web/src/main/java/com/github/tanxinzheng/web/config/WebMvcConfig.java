@@ -6,7 +6,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.github.tanxinzheng.framework.web.handler.LogbackMDCInterceptor;
 import com.github.tanxinzheng.framework.web.json.CustomDateDeserialize;
+import com.github.tanxinzheng.framework.web.json.LocalDateTimeDeserialize;
+import com.github.tanxinzheng.framework.web.json.LocalDateTimeSerializer;
 import com.github.tanxinzheng.framework.web.support.DateConverter;
+import com.github.tanxinzheng.module.dictionary.web.DictionaryAnnotationIntrospector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.context.ApplicationContext;
@@ -22,6 +25,7 @@ import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -63,13 +67,23 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         builder.timeZone("GMT+8");
         builder.simpleDateFormat("yyyy-MM-dd HH:mm:ss");
         builder.deserializerByType(Date.class, new CustomDateDeserialize());
+        builder.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer());
+        builder.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserialize());
         builder.featuresToDisable(
                 SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS,
                 DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES,
                 DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
         );
         builder.featuresToEnable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+        builder.annotationIntrospector(getDictionaryIntrospector());
         return builder.build();
+    }
+
+    @Bean
+    public DictionaryAnnotationIntrospector getDictionaryIntrospector(){
+        DictionaryAnnotationIntrospector dictionaryAnnotationIntrospector = new DictionaryAnnotationIntrospector();
+        dictionaryAnnotationIntrospector.setApplicationContext(applicationContext);
+        return dictionaryAnnotationIntrospector;
     }
 
     @Bean

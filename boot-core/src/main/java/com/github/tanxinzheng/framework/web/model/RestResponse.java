@@ -33,7 +33,6 @@ public class RestResponse<T> implements Serializable {
     private Integer status;
     private String message;
     private T data;
-    private Object error;
     /**
      * 是否保持源对象输出
      */
@@ -66,9 +65,6 @@ public class RestResponse<T> implements Serializable {
         restResponse.setMessage(errorCode.getErrorDesc());
         restResponse.setStatus(HttpStatus.OK.value());
         restResponse.setCode(errorCode.getErrorCode());
-        if(ex != null){
-            restResponse.setError(ex.getMessage());
-        }
         return restResponse;
     }
 
@@ -82,7 +78,6 @@ public class RestResponse<T> implements Serializable {
 
     public static RestResponse failed(HttpStatus code, Exception ex) {
         RestResponse restResponse = RestResponse.failed(code, ex.getMessage());
-        restResponse.setError(ex.getMessage());
         return restResponse;
     }
 

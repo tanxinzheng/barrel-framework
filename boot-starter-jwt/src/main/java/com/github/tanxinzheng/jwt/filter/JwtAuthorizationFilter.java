@@ -49,18 +49,21 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain chain) throws ServletException, IOException {
+        log.debug(request.getRequestURI());
         String authHeader = request.getHeader(jwtConfigProperties.getTokenHeaderName());
         if (authHeader == null || !authHeader.startsWith(TokenType.BEARER.getCode())) {
             chain.doFilter(request, response);
             return;
         }
         String authToken = authHeader.substring(TokenType.BEARER.getCode().length() + 1);// The part after "Bearer "
+        if (!jwtUtils.validateToken(authToken)) {
+            throw new BadCredentialsException("the access token is invalid.");
+        }
         try{
             String username = jwtUtils.getUsernameByToken(authToken);
             JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(authToken);
             jwtAuthenticationProvider.authenticate(authenticationToken);
             log.info("authenticated user: {}, roles: {}", username, authenticationToken.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             chain.doFilter(request, response);
         }catch (JwtException e){
             RestResponse.failed(AuthErrorCode.UNAUTHORIZED, e).toJSON(request, response, HttpStatus.UNAUTHORIZED);

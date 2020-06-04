@@ -47,7 +47,6 @@ public class AuthExceptionHandler {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             restError.setStatus(HttpStatus.UNAUTHORIZED.value());
         }
-        restError.setError(ex.getMessage());
         restError.setCode(String.valueOf(restError.getStatus()));
         log.debug(ex.getMessage(), ex);
         return restError;

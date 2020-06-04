@@ -2,7 +2,10 @@ package com.github.tanxinzheng.jwt.support;
 
 import com.github.tanxinzheng.framework.web.annotation.LoginUser;
 import com.github.tanxinzheng.framework.web.model.CurrentLoginUser;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,7 +34,7 @@ public class LoginUserResolver implements HandlerMethodArgumentResolver {
                                             WebDataBinderFactory webDataBinderFactory) throws Exception {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication == null || !authentication.isAuthenticated()){
-            return null;
+            throw new AccessDeniedException(StringUtils.lowerCase(HttpStatus.FORBIDDEN.name()));
         }
         JwtUser jwtUser = (JwtUser) authentication.getDetails();
         Set<String> roles = authentication.getAuthorities().stream().map(simpleGrantedAuthority->{

@@ -73,7 +73,6 @@ public class BaseErrorController extends AbstractErrorController {
         }
         Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request, MediaType.ALL));
         RestResponse restResponse = RestResponse.failed(status, (String) body.get("message"));
-        restResponse.setError((String) body.get("error"));
         return new ResponseEntity<>(restResponse, status);
     }
 

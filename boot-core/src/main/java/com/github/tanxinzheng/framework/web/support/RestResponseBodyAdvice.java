@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.Page;
 import com.github.tanxinzheng.framework.web.model.RestResponse;
+import com.google.common.collect.Maps;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,11 +15,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import java.lang.reflect.AnnotatedElement;
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  * Created by Jeng on 2016/1/21.
  */
-//@ControllerAdvice
+@ControllerAdvice
 public class RestResponseBodyAdvice implements ResponseBodyAdvice {
 
     private ThreadLocal<ObjectMapper>  mapperThreadLocal = ThreadLocal.withInitial(ObjectMapper::new);
@@ -74,6 +76,12 @@ public class RestResponseBodyAdvice implements ResponseBodyAdvice {
             } catch (JsonProcessingException e) {
                 return RestResponse.failed(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
             }
+        }else if(body instanceof Page){
+            Page page = (Page) body;
+            Map<String, Object> data = Maps.newHashMap();
+            data.put("page", page.toPageInfo());
+            data.put("data", page.getResult());
+            return RestResponse.success(body);
         }else if(body instanceof RestResponse){
             RestResponse restResponse = (RestResponse) body;
             if(restResponse.isKeepOriginFormat()){
