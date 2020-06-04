@@ -37,31 +37,6 @@
 <!--		<skipTests>false</skipTests>-->
 	</properties>
 
-	<distributionManagement>
-		<repository>
-			<id>releases</id>
-			<url>https://devrepo.devcloud.cn-east-3.huaweicloud.com/04/nexus/content/repositories/06b7e0d466000f230f4dc01512fb70e0_1_0/</url>
-		</repository>
-		<snapshotRepository>
-			<id>snapshots</id>
-			<url>https://devrepo.devcloud.cn-east-3.huaweicloud.com/04/nexus/content/repositories/06b7e0d466000f230f4dc01512fb70e0_2_0/</url>
-		</snapshotRepository>
-	</distributionManagement>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>maven-net-cn</id>
-			<name>Maven China Mirror</name>
-			<url>https://repo.huaweicloud.com/repository/maven/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<dependencies>
 		<dependency>
 			<groupId>io.springfox</groupId>
