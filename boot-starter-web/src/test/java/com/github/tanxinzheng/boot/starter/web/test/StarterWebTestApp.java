@@ -1,13 +1,17 @@
 package com.github.tanxinzheng.boot.starter.web.test;
 
+import com.github.tanxinzheng.boot.starter.web.test.domain.DemoResponse;
 import com.github.tanxinzheng.framework.web.model.RestResponse;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @SpringBootApplication(exclude= {DataSourceAutoConfiguration.class},
         scanBasePackages = "com.github.tanxinzheng.**")
@@ -54,4 +58,22 @@ public class StarterWebTestApp {
         return restResponse;
     }
 
+    /**
+     *
+     * @return
+     */
+    @GetMapping(value = "/dictionary")
+    public List<DemoResponse> getDemoList(){
+        DemoResponse demoModel = new DemoResponse();
+        demoModel.setId(UUID.randomUUID().toString());
+        demoModel.setSex("W");
+        demoModel.setUserId("1");
+        demoModel.setDisable(Boolean.FALSE.toString());
+        DemoResponse demoModel2 = new DemoResponse();
+        demoModel2.setId(UUID.randomUUID().toString());
+        demoModel2.setSex("M");
+        demoModel2.setUserId("2");
+        demoModel2.setDisable(Boolean.TRUE.toString());
+        return Lists.newArrayList(demoModel, demoModel2);
+    }
 }

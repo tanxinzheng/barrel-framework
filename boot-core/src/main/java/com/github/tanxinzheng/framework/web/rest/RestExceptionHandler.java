@@ -3,6 +3,7 @@ package com.github.tanxinzheng.framework.web.rest;
 import com.github.tanxinzheng.framework.exception.BusinessException;
 import com.github.tanxinzheng.framework.model.BaseErrorCode;
 import com.github.tanxinzheng.framework.utils.DateTimeUtils;
+import com.github.tanxinzheng.framework.web.model.ErrorRestResponse;
 import com.github.tanxinzheng.framework.web.model.RestResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -51,8 +52,9 @@ public class RestExceptionHandler {
     @ResponseBody
     public RestResponse exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception ex) throws Exception {
         String eventNo = DateTimeUtils.getDatetimeString(new Date()) + RandomStringUtils.randomNumeric(4);
+        log.error("Event No: " + eventNo + " -> " + ex.getMessage(), ex);
         RestResponse restError = RestResponse.failed(BaseErrorCode.SYSTEM_ERROR, ex);
-        restError.setError(ex.getMessage());
+        restError.setMessage("系统异常，请联系管理员，异常事件编号：" + eventNo);
         if(ex instanceof BindException){
             BindException bindException = (BindException) ex;
             restError = handleBindException(bindException.getBindingResult(), bindException);
@@ -69,7 +71,6 @@ public class RestExceptionHandler {
             response.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
             restError.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
             restError.setMessage(MessageFormat.format("文件上传限制最大不能超过{0}M" , (maxUploadSize/1024)/1024));
-            restError.setError(ex.getMessage());
         }else if(ex instanceof AccessDeniedException){
             response.setStatus(HttpStatus.FORBIDDEN.value());
             restError.setStatus(HttpStatus.FORBIDDEN.value());
@@ -77,14 +78,12 @@ public class RestExceptionHandler {
         }else{
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
             restError.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-            restError.setMessage("系统异常，请联系管理员，异常事件编号：" + eventNo);
-            log.error("Event No: " + eventNo + " -> " + ex.getMessage(), ex);
         }
         return restError;
     }
 
-    protected RestResponse handleBindException(BindingResult bindingResult, Exception ex) {
-        RestResponse restError = RestResponse.failed(HttpStatus.BAD_REQUEST, "非法请求参数，校验请求参数不合法");
+    protected ErrorRestResponse handleBindException(BindingResult bindingResult, Exception ex) {
+        ErrorRestResponse restError = (ErrorRestResponse) ErrorRestResponse.failed(HttpStatus.BAD_REQUEST, "非法请求参数，校验请求参数不合法");
         BindingResult result = bindingResult;
         List<org.springframework.validation.FieldError> fieldErrors = result.getFieldErrors();
         List<FieldError> fieldErrorList = new ArrayList<FieldError>();

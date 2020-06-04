@@ -81,7 +81,7 @@ public class RestResponseBodyAdvice implements ResponseBodyAdvice {
             Map<String, Object> data = Maps.newHashMap();
             data.put("page", page.toPageInfo());
             data.put("data", page.getResult());
-            return RestResponse.success(data);
+            return RestResponse.success(body);
         }else if(body instanceof RestResponse){
             RestResponse restResponse = (RestResponse) body;
             if(restResponse.isKeepOriginFormat()){

@@ -1,5 +1,6 @@
 package com.github.tanxinzheng.boot.starter.web.test;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.github.tanxinzheng.framework.web.model.RestResponse;
@@ -81,5 +82,22 @@ public class WebTest {
         Assert.assertEquals("测试", data.get("name"));
     }
 
+
+    @Test
+    public void testDictionaryTransfer() throws Exception {
+        ResultActions actions = mockMvc.perform(get("/test/dictionary")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+        String resultJson = actions.andReturn().getResponse().getContentAsString();
+        JSONArray jsonArray = JSONArray.parseArray(resultJson);
+        org.springframework.util.Assert.notEmpty(jsonArray, "测试不通过");
+        org.springframework.util.Assert.isTrue(jsonArray.getJSONObject(0).get("sexDesc").equals("女"), "测试不通过");
+        org.springframework.util.Assert.isTrue(jsonArray.getJSONObject(1).get("sexDesc").equals("男"), "测试不通过");
+        org.springframework.util.Assert.isTrue(jsonArray.getJSONObject(0).get("disableName").equals("启用"), "测试不通过");
+        org.springframework.util.Assert.isTrue(jsonArray.getJSONObject(1).get("disableName").equals("禁用"), "测试不通过");
+        org.springframework.util.Assert.isTrue(jsonArray.getJSONObject(0).getJSONObject("userIdDetail").get("userName").equals("管理员"), "测试不通过");
+    }
 
 }
