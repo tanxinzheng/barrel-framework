@@ -30,9 +30,8 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-		<spring-cloud.version>Camden.SR5</spring-cloud.version>
 		<boot.fremework.version>1.0.0-SNAPSHOT</boot.fremework.version>
-		<spring.boot.version>2.2.0.RELEASE</spring.boot.version>
+		<spring.boot.version>2.2.6.RELEASE</spring.boot.version>
 		<io.springfox.version>2.9.2</io.springfox.version>
 		<skipNpmBuild>false</skipNpmBuild>
 <!--		<skipTests>false</skipTests>-->
