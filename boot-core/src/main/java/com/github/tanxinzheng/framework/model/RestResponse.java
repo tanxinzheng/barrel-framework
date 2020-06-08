@@ -1,15 +1,10 @@
-package com.github.tanxinzheng.framework.web.model;
+package com.github.tanxinzheng.framework.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.pagehelper.PageInfo;
 import com.github.tanxinzheng.framework.exception.ErrorCode;
-import com.github.tanxinzheng.framework.utils.DateTimeUtils;
 import lombok.Data;
-import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.commons.lang3.time.FastDateFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
@@ -20,7 +15,6 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 /**
  * Created by tanxinzheng on 2018/9/27.

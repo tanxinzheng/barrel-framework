@@ -1,6 +1,5 @@
-package com.github.tanxinzheng.jwt.config;
+package com.github.tanxinzheng.framework.constant;
 
-import com.github.tanxinzheng.jwt.support.TokenType;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

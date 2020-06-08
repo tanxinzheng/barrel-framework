@@ -1,4 +1,4 @@
-package com.github.tanxinzheng.jwt.support;
+package com.github.tanxinzheng.framework.constant;
 
 /**
  * Created by tanxinzheng on 2018/11/30.

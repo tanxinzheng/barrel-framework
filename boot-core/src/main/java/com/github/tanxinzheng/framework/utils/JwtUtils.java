@@ -1,17 +1,12 @@
-package com.github.tanxinzheng.jwt.support;
+package com.github.tanxinzheng.framework.utils;
 
-import com.github.tanxinzheng.jwt.config.JwtConfigProperties;
+import com.github.tanxinzheng.framework.constant.JwtConfigProperties;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.UUID;
 
@@ -133,45 +128,5 @@ public class JwtUtils {
         }
         return claims;
     }
-
-    /**
-     * 获取token
-     * @param request
-     * @param headerName
-     * @param cookieName
-     * @param parameterName
-     * @return
-     */
-    public String getTokenValue(HttpServletRequest request, String headerName, String cookieName, String parameterName){
-        if(request == null){
-            return null;
-        }
-        // 从Header中获取token
-        String token = request.getHeader(headerName);
-        if(StringUtils.isNotBlank(token)){
-            token = token.replaceAll(StringUtils.lowerCase(jwtConfigProperties.getTokenType()) + " ", "");
-        }
-        if(StringUtils.isBlank(token)){
-            // 从请求参数中获取token
-            token = request.getParameter(parameterName);
-        }
-        if(StringUtils.isBlank(token)
-                && ArrayUtils.isNotEmpty(request.getCookies())){
-            // 从Cookie中获取token
-            String cookieTokenName = cookieName;
-            for (Cookie cookie : request.getCookies()) {
-                if(cookie.getName() != null
-                        && cookieTokenName != null
-                        && cookie.getName().equalsIgnoreCase(cookieTokenName)){
-                    token = cookie.getValue();
-                    break;
-                }
-            }
-        }
-        return token;
-    }
-
-
-
 
 }

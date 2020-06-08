@@ -2,6 +2,7 @@ package com.github.tanxinzheng.framework.core.model;
 
 import com.github.tanxinzheng.framework.model.BaseQuery;
 import lombok.Data;
+
 import javax.validation.constraints.NotBlank;
 
 /**
