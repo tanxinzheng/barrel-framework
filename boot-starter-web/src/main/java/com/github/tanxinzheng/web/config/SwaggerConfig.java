@@ -16,7 +16,8 @@ import java.util.List;
 
 /**
  * 注：
- * 1.使用 http://localhost:8000/swagger-ui.html 时，必须禁用@EnableWebMvc
+ * 1. 使用 http://localhost:8000/swagger-ui.html 时，必须禁用@EnableWebMvc
+ * 2. http://localhost:8000/v2/api-docs
  *
  */
 @Configuration

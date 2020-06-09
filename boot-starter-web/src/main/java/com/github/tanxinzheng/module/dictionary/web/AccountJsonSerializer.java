@@ -5,10 +5,10 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Map;
 
@@ -21,7 +21,7 @@ import java.util.Map;
 @Slf4j
 public class AccountJsonSerializer extends JsonSerializer<Object> {
 
-    @Autowired(required = false)
+    @Resource
     AccountInterpreterService accountInterpreterService;
 
     AccountField accountField;

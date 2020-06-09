@@ -7,8 +7,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedElement;
 import java.util.Map;
 
 /**
@@ -27,13 +25,10 @@ public class DictionaryAnnotationIntrospector extends JacksonAnnotationIntrospec
 
     @Override
     public Object findSerializer(Annotated a) {
-        AnnotatedElement annotated = a.getAnnotated();
-        for (Annotation annotation : annotated.getAnnotations()) {
-            for (Class key : annotationJsonSerializerMap.keySet()) {
-                if(annotation.annotationType().isAssignableFrom(key)){
-                    Object dictionaryTransfer = a.getAnnotation(key);
-                    return applicationContext.getBean(annotationJsonSerializerMap.get(key), dictionaryTransfer);
-                }
+        for (Class key : annotationJsonSerializerMap.keySet()) {
+            if(a.hasAnnotation(key)){
+                Object dictionaryTransfer = a.getAnnotation(key);
+                return applicationContext.getBean(annotationJsonSerializerMap.get(key), dictionaryTransfer);
             }
         }
         return super.findSerializer(a);

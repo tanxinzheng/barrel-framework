@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class DictionaryJsonSerializer extends JsonSerializer<Object>{
 
     private Map<String, DictionaryTransferService> dictionaryInterpreterServiceMap = new ConcurrentHashMap<>();
 
-    @Autowired
+    @Resource
     private DictionaryInterpreterService dictionaryInterpreterService;
 
     @Autowired

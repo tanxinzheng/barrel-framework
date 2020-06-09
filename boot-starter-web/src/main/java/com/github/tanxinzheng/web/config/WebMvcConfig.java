@@ -9,7 +9,7 @@ import com.github.tanxinzheng.framework.web.json.CustomDateDeserialize;
 import com.github.tanxinzheng.framework.web.json.LocalDateTimeDeserialize;
 import com.github.tanxinzheng.framework.web.json.LocalDateTimeSerializer;
 import com.github.tanxinzheng.framework.web.support.DateConverter;
-import com.github.tanxinzheng.module.dictionary.web.DictionaryAnnotationIntrospector;
+import com.github.tanxinzheng.module.dictionary.web.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.context.ApplicationContext;
@@ -19,7 +19,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
@@ -42,6 +44,17 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         System.out.println();
+    }
+
+    /**
+     * 支持
+     * @param converters
+     */
+    @Override
+    protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setObjectMapper(objectMapper());
+        converters.add(converter);
     }
 
     /**
@@ -83,6 +96,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     public DictionaryAnnotationIntrospector getDictionaryIntrospector(){
         DictionaryAnnotationIntrospector dictionaryAnnotationIntrospector = new DictionaryAnnotationIntrospector();
         dictionaryAnnotationIntrospector.setApplicationContext(applicationContext);
+        dictionaryAnnotationIntrospector.appendAnnotationJsonSerializer(DictionaryTransfer.class, DictionaryJsonSerializer.class);
+        dictionaryAnnotationIntrospector.appendAnnotationJsonSerializer(AccountField.class, AccountJsonSerializer.class);
         return dictionaryAnnotationIntrospector;
     }
 
@@ -111,7 +126,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         registry.enableContentNegotiation(false, new MappingJackson2JsonView());
-        registry.enableContentNegotiation(new MappingJackson2JsonView());
     }
 
     @Bean

@@ -1,4 +1,4 @@
-package com.github.tanxinzheng.framework.utils;
+package com.github.tanxinzheng.jwt.support;
 
 import com.github.tanxinzheng.framework.constant.JwtConfigProperties;
 import io.jsonwebtoken.*;

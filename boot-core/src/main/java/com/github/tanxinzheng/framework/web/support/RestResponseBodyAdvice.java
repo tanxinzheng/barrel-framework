@@ -13,6 +13,7 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import javax.annotation.Resource;
 import java.lang.reflect.AnnotatedElement;
 import java.util.Arrays;
 import java.util.Map;
@@ -23,7 +24,8 @@ import java.util.Map;
 @ControllerAdvice
 public class RestResponseBodyAdvice implements ResponseBodyAdvice {
 
-    private ThreadLocal<ObjectMapper>  mapperThreadLocal = ThreadLocal.withInitial(ObjectMapper::new);
+    @Resource
+    ObjectMapper objectMapper;
 
     private static final Class[] annos = {
             RequestMapping.class,
@@ -66,13 +68,12 @@ public class RestResponseBodyAdvice implements ResponseBodyAdvice {
                                   Class selectedConverterType,
                                   ServerHttpRequest request,
                                   ServerHttpResponse response) {
-        ObjectMapper mapper = mapperThreadLocal.get();
         response.getHeaders().setContentType(MediaType.APPLICATION_JSON_UTF8);
         if (body instanceof String){
             RestResponse result = RestResponse.success(body);
             try {
                 //因为是String类型，我们要返回Json字符串，否则SpringBoot框架会转换出错
-                return mapper.writeValueAsString(result);
+                return objectMapper.writeValueAsString(result);
             } catch (JsonProcessingException e) {
                 return RestResponse.failed(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
             }
@@ -87,7 +88,11 @@ public class RestResponseBodyAdvice implements ResponseBodyAdvice {
             if(restResponse.isKeepOriginFormat()){
                 return restResponse.getData();
             }
-            return body;
+            try {
+                return objectMapper.writeValueAsString(body);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
         }
         return RestResponse.success(body);
     }

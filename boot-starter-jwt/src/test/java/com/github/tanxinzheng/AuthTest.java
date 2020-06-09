@@ -4,34 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.github.tanxinzheng.framework.web.model.CurrentLoginUser;
 import com.github.tanxinzheng.framework.web.model.RestResponse;
-import com.github.tanxinzheng.jwt.config.JwtConfigProperties;
-import com.github.tanxinzheng.jwt.controller.dto.LoginRequest;
-import com.github.tanxinzheng.jwt.controller.dto.LoginResponse;
 import com.github.tanxinzheng.jwt.exception.AuthErrorCode;
-import com.github.tanxinzheng.jwt.support.TokenType;
-import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.client.ClientHttpRequestExecution;
-import org.springframework.http.client.ClientHttpRequestInterceptor;
-import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
-import org.springframework.http.client.support.HttpRequestWrapper;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.ResponseErrorHandler;
-import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * Unit test for simple App.

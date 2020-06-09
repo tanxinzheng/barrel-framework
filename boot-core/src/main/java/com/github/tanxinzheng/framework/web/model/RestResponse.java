@@ -1,9 +1,11 @@
-package com.github.tanxinzheng.framework.model;
+package com.github.tanxinzheng.framework.web.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tanxinzheng.framework.exception.ErrorCode;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,12 +22,18 @@ import java.time.format.DateTimeFormatter;
  * Created by tanxinzheng on 2018/9/27.
  */
 @Data
+@ApiModel("返回对象")
 public class RestResponse<T> implements Serializable {
 
+    @ApiModelProperty(value = "代码", example = "200")
     private String code;
+    @ApiModelProperty(value = "时间戳", example = "2020-01-02 12:00:00")
     private String timestamp;
+    @ApiModelProperty(value = "状态码", example = "200")
     private Integer status;
+    @ApiModelProperty(value = "提示信息", example = "SUCCESS")
     private String message;
+    @ApiModelProperty(value = "返回数据")
     private T data;
     /**
      * 是否保持源对象输出
