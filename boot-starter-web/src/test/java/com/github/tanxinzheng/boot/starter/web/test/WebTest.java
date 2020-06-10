@@ -3,7 +3,7 @@ package com.github.tanxinzheng.boot.starter.web.test;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.github.tanxinzheng.framework.web.model.RestResponse;
+import com.github.tanxinzheng.framework.model.RestResponse;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;

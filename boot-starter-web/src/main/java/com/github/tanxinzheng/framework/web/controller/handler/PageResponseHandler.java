@@ -3,7 +3,7 @@ package com.github.tanxinzheng.framework.web.controller.handler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tanxinzheng.framework.model.BaseResultCode;
-import com.github.tanxinzheng.framework.web.model.RestResponse;
+import com.github.tanxinzheng.framework.model.RestResponse;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

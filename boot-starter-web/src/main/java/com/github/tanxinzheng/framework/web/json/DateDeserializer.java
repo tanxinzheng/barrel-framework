@@ -16,7 +16,7 @@ import java.util.Date;
  * Created by tanxinzheng on 16/12/11.
  */
 @Slf4j
-public class CustomDateDeserialize extends JsonDeserializer<Date> {
+public class DateDeserializer extends JsonDeserializer<Date> {
 
     public static final FastDateFormat ISO_DATE_MINUTE_ZONE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd HH:mm");
 

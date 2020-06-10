@@ -1,7 +1,7 @@
 package com.github.tanxinzheng.framework.web.rest;
 
 import com.github.tanxinzheng.framework.model.BaseResultCode;
-import com.github.tanxinzheng.framework.web.model.RestResponse;
+import com.github.tanxinzheng.framework.model.RestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController;

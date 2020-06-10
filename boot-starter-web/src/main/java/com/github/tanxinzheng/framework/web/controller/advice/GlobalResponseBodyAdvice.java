@@ -2,7 +2,7 @@ package com.github.tanxinzheng.framework.web.controller.advice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tanxinzheng.framework.web.controller.handler.ResponseBodyHandler;
-import com.github.tanxinzheng.framework.web.model.RestResponse;
+import com.github.tanxinzheng.framework.model.RestResponse;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.github.tanxinzheng.jwt.handler;
 
 import com.github.tanxinzheng.framework.model.BaseResultCode;
-import com.github.tanxinzheng.framework.web.model.RestResponse;
+import com.github.tanxinzheng.framework.model.RestResponse;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.access.AccessDeniedHandler;

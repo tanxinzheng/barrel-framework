@@ -1,4 +1,4 @@
-package com.github.tanxinzheng.framework.web.model;
+package com.github.tanxinzheng.framework.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.DeserializationFeature;

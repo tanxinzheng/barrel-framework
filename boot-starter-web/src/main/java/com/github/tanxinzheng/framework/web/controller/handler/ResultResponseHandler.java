@@ -1,6 +1,6 @@
 package com.github.tanxinzheng.framework.web.controller.handler;
 
-import com.github.tanxinzheng.framework.web.model.RestResponse;
+import com.github.tanxinzheng.framework.model.RestResponse;
 import org.springframework.stereotype.Component;
 
 @Component

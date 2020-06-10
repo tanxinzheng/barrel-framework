@@ -3,7 +3,7 @@ package com.github.tanxinzheng;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.github.tanxinzheng.framework.web.model.CurrentLoginUser;
-import com.github.tanxinzheng.framework.web.model.RestResponse;
+import com.github.tanxinzheng.framework.model.RestResponse;
 import com.github.tanxinzheng.jwt.exception.AuthErrorCode;
 import org.junit.Assert;
 import org.junit.Before;

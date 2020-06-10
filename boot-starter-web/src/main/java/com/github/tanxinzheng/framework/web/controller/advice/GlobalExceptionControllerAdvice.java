@@ -4,7 +4,7 @@ import com.github.tanxinzheng.framework.exception.BusinessException;
 import com.github.tanxinzheng.framework.model.BaseResultCode;
 import com.github.tanxinzheng.framework.utils.DateTimeUtils;
 import com.github.tanxinzheng.framework.web.model.ErrorRestResponse;
-import com.github.tanxinzheng.framework.web.model.RestResponse;
+import com.github.tanxinzheng.framework.model.RestResponse;
 import com.github.tanxinzheng.framework.web.rest.FieldError;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -68,27 +68,27 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
         return ResponseEntity.badRequest().body(restResponse);
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseBody
-    ResponseEntity<Object> handleMethodArgumentNotValidException(HttpServletRequest request,
-                                                                HttpServletResponse response,
-                                                                 MethodArgumentNotValidException exception){
-        logger.debug(exception.getMessage(), exception);
-        ErrorRestResponse errorRestResponse = handleBindException(exception.getBindingResult(), exception);
-        return ResponseEntity.badRequest().body(errorRestResponse);
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(BindException.class)
-    @ResponseBody
-    ResponseEntity<Object> doHandleBindException(HttpServletRequest request,
-                                                                 HttpServletResponse response,
-                                                                 BindException exception){
-        logger.debug(exception.getMessage(), exception);
-        ErrorRestResponse errorRestResponse = handleBindException(exception.getBindingResult(), exception);
-        return ResponseEntity.badRequest().body(errorRestResponse);
-    }
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    @ResponseBody
+//    ResponseEntity<Object> handleMethodArgumentNotValidException(HttpServletRequest request,
+//                                                                HttpServletResponse response,
+//                                                                 MethodArgumentNotValidException exception){
+//        logger.debug(exception.getMessage(), exception);
+//        ErrorRestResponse errorRestResponse = handleBindException(exception.getBindingResult(), exception);
+//        return ResponseEntity.badRequest().body(errorRestResponse);
+//    }
+//
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    @ExceptionHandler(BindException.class)
+//    @ResponseBody
+//    ResponseEntity<Object> doHandleBindException(HttpServletRequest request,
+//                                                                 HttpServletResponse response,
+//                                                                 BindException exception){
+//        logger.debug(exception.getMessage(), exception);
+//        ErrorRestResponse errorRestResponse = handleBindException(exception.getBindingResult(), exception);
+//        return ResponseEntity.badRequest().body(errorRestResponse);
+//    }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(AccessDeniedException.class)

@@ -2,7 +2,7 @@ package com.github.tanxinzheng.jwt.filter;
 
 import com.github.tanxinzheng.framework.constant.JwtConfigProperties;
 import com.github.tanxinzheng.framework.constant.TokenType;
-import com.github.tanxinzheng.framework.web.model.RestResponse;
+import com.github.tanxinzheng.framework.model.RestResponse;
 import com.github.tanxinzheng.jwt.exception.AuthErrorCode;
 import com.github.tanxinzheng.jwt.support.JwtAuthenticationProvider;
 import com.github.tanxinzheng.jwt.support.JwtAuthenticationToken;

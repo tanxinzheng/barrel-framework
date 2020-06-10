@@ -1,5 +1,6 @@
 package com.github.tanxinzheng.framework.web.model;
 
+import com.github.tanxinzheng.framework.model.RestResponse;
 import lombok.Data;
 
 /**

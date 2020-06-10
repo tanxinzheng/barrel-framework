@@ -1,7 +1,7 @@
 package com.github.tanxinzheng.boot.starter.web.test;
 
 import com.github.tanxinzheng.boot.starter.web.test.domain.DemoResponse;
-import com.github.tanxinzheng.framework.web.model.RestResponse;
+import com.github.tanxinzheng.framework.model.RestResponse;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.springframework.boot.SpringApplication;

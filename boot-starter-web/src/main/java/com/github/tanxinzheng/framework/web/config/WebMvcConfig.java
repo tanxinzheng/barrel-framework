@@ -10,7 +10,7 @@ import com.github.tanxinzheng.framework.web.dictionary.AccountJsonSerializer;
 import com.github.tanxinzheng.framework.web.dictionary.DictionaryAnnotationIntrospector;
 import com.github.tanxinzheng.framework.web.dictionary.DictionaryJsonSerializer;
 import com.github.tanxinzheng.framework.web.handler.LogbackMDCInterceptor;
-import com.github.tanxinzheng.framework.web.json.CustomDateDeserialize;
+import com.github.tanxinzheng.framework.web.json.DateDeserializer;
 import com.github.tanxinzheng.framework.web.json.LocalDateTimeDeserialize;
 import com.github.tanxinzheng.framework.web.json.LocalDateTimeSerializer;
 import com.github.tanxinzheng.framework.web.support.DateConverter;
@@ -84,7 +84,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         builder.timeZone("GMT+8");
         builder.simpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        builder.deserializerByType(Date.class, new CustomDateDeserialize());
+        builder.deserializerByType(Date.class, new DateDeserializer());
         builder.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer());
         builder.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserialize());
         builder.featuresToDisable(
