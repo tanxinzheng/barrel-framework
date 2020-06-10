@@ -1,26 +1,16 @@
 package com.github.tanxinzheng.jwt.filter;
 
-import com.github.tanxinzheng.framework.exception.ErrorCode;
+import com.github.tanxinzheng.framework.constant.JwtConfigProperties;
+import com.github.tanxinzheng.framework.constant.TokenType;
 import com.github.tanxinzheng.framework.web.model.RestResponse;
-import com.github.tanxinzheng.jwt.config.JwtConfigProperties;
 import com.github.tanxinzheng.jwt.exception.AuthErrorCode;
 import com.github.tanxinzheng.jwt.support.JwtAuthenticationProvider;
 import com.github.tanxinzheng.jwt.support.JwtAuthenticationToken;
 import com.github.tanxinzheng.jwt.support.JwtUtils;
-import com.github.tanxinzheng.jwt.support.TokenType;
 import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 

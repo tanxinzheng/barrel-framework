@@ -1,7 +1,7 @@
 package com.github.tanxinzheng.boot.starter.web.test.domain;
 
-import com.github.tanxinzheng.module.dictionary.web.AccountField;
-import com.github.tanxinzheng.module.dictionary.web.DictionaryTransfer;
+import com.github.tanxinzheng.framework.web.annotation.AccountField;
+import com.github.tanxinzheng.framework.web.annotation.DictionaryTransfer;
 import lombok.Data;
 
 @Data

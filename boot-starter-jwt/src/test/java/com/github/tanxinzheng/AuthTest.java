@@ -46,7 +46,7 @@ public class AuthTest extends JwtBaseTest {
         System.out.println(data);
         RestResponse<String> response = JSONObject.parseObject(data, new TypeReference<RestResponse<String>>(){});
         Assert.assertNotNull(response);
-        Assert.assertEquals("测试访问已保护资源", AuthErrorCode.UNAUTHORIZED.getErrorCode(), response.getCode());
+        Assert.assertEquals("测试访问已保护资源", AuthErrorCode.UNAUTHORIZED.getCode(), response.getCode());
     }
 
     @Test

@@ -52,6 +52,21 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>com.github.tanxinzheng</groupId>
+				<artifactId>boot-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.tanxinzheng</groupId>
+				<artifactId>boot-starter-jwt</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.tanxinzheng</groupId>
+				<artifactId>boot-starter-web</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-actuator</artifactId>
 				<version>${spring.boot.version}</version>

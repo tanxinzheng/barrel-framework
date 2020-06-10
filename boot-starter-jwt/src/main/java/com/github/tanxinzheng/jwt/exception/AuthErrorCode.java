@@ -1,8 +1,8 @@
 package com.github.tanxinzheng.jwt.exception;
 
-import com.github.tanxinzheng.framework.exception.ErrorCode;
+import com.github.tanxinzheng.framework.exception.ResultCode;
 
-public enum AuthErrorCode implements ErrorCode {
+public enum AuthErrorCode implements ResultCode {
 
     NOT_FOUND_USERNAME("E20001", "该用户未注册"),
     UNAUTHORIZED("E20003", "未认证授权"),
@@ -10,30 +10,30 @@ public enum AuthErrorCode implements ErrorCode {
     ;
 
     AuthErrorCode(String errorCode, String errorDesc) {
-        this.errorCode = errorCode;
-        this.errorDesc = errorDesc;
+        this.code = errorCode;
+        this.desc = errorDesc;
     }
 
-    private String errorCode;
-    private String errorDesc;
+    private String code;
+    private String desc;
 
     @Override
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    @Override
-    public String getErrorCode() {
-        return this.errorCode;
+    public void setCode(String Code) {
+        this.code = Code;
     }
 
     @Override
-    public void setErrorDesc(String errorDesc) {
-        this.errorDesc = errorDesc;
+    public String getCode() {
+        return this.code;
     }
 
     @Override
-    public String getErrorDesc() {
-        return this.errorDesc;
+    public void setDesc(String Desc) {
+        this.desc = Desc;
+    }
+
+    @Override
+    public String getDesc() {
+        return this.desc;
     }
 }
