@@ -1,7 +1,7 @@
 package com.github.tanxinzheng.jwt.handler;
 
+import com.github.tanxinzheng.framework.model.BaseResultCode;
 import com.github.tanxinzheng.framework.web.model.RestResponse;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -45,7 +45,7 @@ public class TokenAccessDeniedHandler implements AccessDeniedHandler {
             }else {
 //                response.sendError(HttpServletResponse.SC_FORBIDDEN,
 //                        accessDeniedException.getMessage());
-                RestResponse.failed(HttpStatus.FORBIDDEN, accessDeniedException).toJSON(request, response);
+                RestResponse.failed(BaseResultCode.SYSTEM_ERROR, accessDeniedException).toJSON(request, response);
             }
         }
     }

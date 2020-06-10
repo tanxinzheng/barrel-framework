@@ -1,5 +1,6 @@
 package com.github.tanxinzheng.jwt.exception;
 
+import com.github.tanxinzheng.framework.model.BaseResultCode;
 import com.github.tanxinzheng.framework.web.model.RestResponse;
 import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
@@ -33,21 +34,16 @@ public class AuthExceptionHandler {
     })
     @ResponseBody
     public RestResponse exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception ex) throws Exception {
-        RestResponse restError = RestResponse.failed(HttpStatus.INTERNAL_SERVER_ERROR, ex);
+        RestResponse restError = RestResponse.failed(BaseResultCode.SYSTEM_ERROR, ex);
         if(ex instanceof UsernameNotFoundException) {
             response.setStatus(HttpStatus.BAD_REQUEST.value());
-            restError.setStatus(HttpStatus.BAD_REQUEST.value());
         }else if(ex instanceof BadCredentialsException){
             response.setStatus(HttpStatus.BAD_REQUEST.value());
-            restError.setStatus(HttpStatus.BAD_REQUEST.value());
         }else if(ex instanceof AccessDeniedException){
             response.setStatus(HttpStatus.FORBIDDEN.value());
-            restError.setStatus(HttpStatus.FORBIDDEN.value());
         }else if(ex instanceof JwtException){
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            restError.setStatus(HttpStatus.UNAUTHORIZED.value());
         }
-        restError.setCode(String.valueOf(restError.getStatus()));
         log.debug(ex.getMessage(), ex);
         return restError;
     }

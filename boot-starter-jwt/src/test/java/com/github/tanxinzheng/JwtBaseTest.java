@@ -2,11 +2,11 @@ package com.github.tanxinzheng;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.github.tanxinzheng.framework.constant.JwtConfigProperties;
+import com.github.tanxinzheng.framework.constant.TokenType;
 import com.github.tanxinzheng.framework.web.model.RestResponse;
-import com.github.tanxinzheng.jwt.config.JwtConfigProperties;
 import com.github.tanxinzheng.jwt.controller.dto.LoginRequest;
 import com.github.tanxinzheng.jwt.controller.dto.LoginResponse;
-import com.github.tanxinzheng.jwt.support.TokenType;
 import org.assertj.core.util.Lists;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
