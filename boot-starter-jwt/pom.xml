@@ -27,12 +27,10 @@
         <dependency>
             <groupId>com.github.tanxinzheng</groupId>
             <artifactId>boot-core</artifactId>
-            <version>${parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.tanxinzheng</groupId>
             <artifactId>boot-starter-web</artifactId>
-            <version>${parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

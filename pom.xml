@@ -54,17 +54,17 @@
 			<dependency>
 				<groupId>com.github.tanxinzheng</groupId>
 				<artifactId>boot-core</artifactId>
-				<version>${project.version}</version>
+				<version>${boot.fremework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.github.tanxinzheng</groupId>
 				<artifactId>boot-starter-jwt</artifactId>
-				<version>${project.version}</version>
+				<version>${boot.fremework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.github.tanxinzheng</groupId>
 				<artifactId>boot-starter-web</artifactId>
-				<version>${project.version}</version>
+				<version>${boot.fremework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
