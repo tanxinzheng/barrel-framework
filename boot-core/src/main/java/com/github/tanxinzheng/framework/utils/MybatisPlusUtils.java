@@ -3,6 +3,7 @@ package com.github.tanxinzheng.framework.utils;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.tanxinzheng.framework.model.QueryWrapperCondition;
+import com.github.tanxinzheng.framework.model.QueryWrapperSort;
 import com.github.tanxinzheng.framework.mybatis.constants.ConditionType;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
@@ -30,7 +31,7 @@ public class MybatisPlusUtils {
      * @return
      */
     public static QueryWrapper getQueryWrapper4Condition(List<QueryWrapperCondition> conditions,
-                                                         List<QueryWrapperCondition> sorts){
+                                                         List<QueryWrapperSort> sorts){
         QueryWrapper queryWrapper = new QueryWrapper();
         if(CollectionUtils.isNotEmpty(conditions)) {
             for (QueryWrapperCondition conditionVo : conditions) {
@@ -98,7 +99,7 @@ public class MybatisPlusUtils {
         if(CollectionUtils.isEmpty(sorts)){
             return queryWrapper;
         }
-        for (QueryWrapperCondition sortVo : sorts) {
+        for (QueryWrapperSort sortVo : sorts) {
             if(StringUtils.isBlank(sortVo.getColumn())
                     || StringUtils.isBlank(sortVo.getType())
                     || "null".equalsIgnoreCase(sortVo.getType())

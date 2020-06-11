@@ -4,9 +4,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-public class QueryWrapperCondition {
+public class QueryWrapperSort {
 
-    @ApiModelProperty(value = "连接类型，如like,equals,gt,ge,lt,le, 具体参考ConditionType")
+    @ApiModelProperty(value = "排序类型：ASC | DESC")
     private String type;
     @ApiModelProperty(value = "字段名")
     private String column;
