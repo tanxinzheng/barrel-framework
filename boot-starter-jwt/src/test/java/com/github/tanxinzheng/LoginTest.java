@@ -2,7 +2,7 @@ package com.github.tanxinzheng;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.github.tanxinzheng.framework.model.RestResponse;
+import com.github.tanxinzheng.framework.model.Result;
 import com.github.tanxinzheng.jwt.controller.dto.LoginRequest;
 import com.github.tanxinzheng.jwt.controller.dto.LoginResponse;
 import org.junit.Assert;
@@ -59,8 +59,8 @@ public class LoginTest {
                 .andDo(print())
                 .andExpect(status().isBadRequest());
         String resultJson = actions.andReturn().getResponse().getContentAsString();
-        RestResponse<LoginResponse> restResponse = JSONObject.parseObject(resultJson, new TypeReference<RestResponse<LoginResponse>>(){});
-        Assert.assertEquals("该用户名未注册", restResponse.getMessage());
+        Result<LoginResponse> result = JSONObject.parseObject(resultJson, new TypeReference<Result<LoginResponse>>(){});
+        Assert.assertEquals("该用户名未注册", result.getMessage());
     }
 
     @Test
@@ -75,8 +75,8 @@ public class LoginTest {
                 .andDo(print())
                 .andExpect(status().isBadRequest());
         String resultJson = actions.andReturn().getResponse().getContentAsString();
-        RestResponse<LoginResponse> restResponse = JSONObject.parseObject(resultJson, new TypeReference<RestResponse<LoginResponse>>(){});
-        Assert.assertEquals("未注册用户名测试", "该用户名未注册", restResponse.getMessage());
+        Result<LoginResponse> result = JSONObject.parseObject(resultJson, new TypeReference<Result<LoginResponse>>(){});
+        Assert.assertEquals("未注册用户名测试", "该用户名未注册", result.getMessage());
     }
 
     @Test
@@ -91,8 +91,8 @@ public class LoginTest {
                 .andDo(print())
                 .andExpect(status().isBadRequest());
         String resultJson = action.andReturn().getResponse().getContentAsString();
-        RestResponse<LoginResponse> restResponse = JSONObject.parseObject(resultJson, new TypeReference<RestResponse<LoginResponse>>(){});
-        Assert.assertEquals("用户名或密码不正确", "用户名或密码不正确", restResponse.getMessage());
+        Result<LoginResponse> result = JSONObject.parseObject(resultJson, new TypeReference<Result<LoginResponse>>(){});
+        Assert.assertEquals("用户名或密码不正确", "用户名或密码不正确", result.getMessage());
     }
 
     @Test
@@ -107,9 +107,9 @@ public class LoginTest {
                 .andDo(print())
                 .andExpect(status().isOk());
         String resultJson = action.andReturn().getResponse().getContentAsString();
-        RestResponse<LoginResponse> restResponse = JSONObject.parseObject(resultJson, new TypeReference<RestResponse<LoginResponse>>(){});
-        Assert.assertNotNull("登录成功", restResponse.getData().getAccessToken());
-        Assert.assertEquals("登录成功", "admin", restResponse.getData().getUsername());
+        Result<LoginResponse> result = JSONObject.parseObject(resultJson, new TypeReference<Result<LoginResponse>>(){});
+        Assert.assertNotNull("登录成功", result.getData().getAccessToken());
+        Assert.assertEquals("登录成功", "admin", result.getData().getUsername());
     }
 
     @Test
@@ -123,8 +123,8 @@ public class LoginTest {
                 .andDo(print())
                 .andExpect(status().isBadRequest());
         String resultJson = action.andReturn().getResponse().getContentAsString();
-        RestResponse<LoginResponse> restResponse = JSONObject.parseObject(resultJson, new TypeReference<RestResponse<LoginResponse>>(){});
-        Assert.assertEquals("请输入用户名", restResponse.getMessage());
+        Result<LoginResponse> result = JSONObject.parseObject(resultJson, new TypeReference<Result<LoginResponse>>(){});
+        Assert.assertEquals("请输入用户名", result.getMessage());
 
         loginRequest.setPassword(null);
         loginRequest.setUsername("admin");
@@ -135,8 +135,8 @@ public class LoginTest {
                 .andDo(print())
                 .andExpect(status().isBadRequest());
         String resultJson2 = action2.andReturn().getResponse().getContentAsString();
-        RestResponse<LoginResponse> restResponse2 = JSONObject.parseObject(resultJson2, new TypeReference<RestResponse<LoginResponse>>(){});
-        Assert.assertEquals("请输入密码", restResponse2.getMessage());
+        Result<LoginResponse> result2 = JSONObject.parseObject(resultJson2, new TypeReference<Result<LoginResponse>>(){});
+        Assert.assertEquals("请输入密码", result2.getMessage());
     }
 
 

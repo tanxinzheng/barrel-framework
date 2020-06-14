@@ -3,8 +3,8 @@ package com.github.tanxinzheng.framework.web.controller.advice;
 import com.github.tanxinzheng.framework.exception.BusinessException;
 import com.github.tanxinzheng.framework.model.BaseResultCode;
 import com.github.tanxinzheng.framework.utils.DateTimeUtils;
-import com.github.tanxinzheng.framework.web.model.ErrorRestResponse;
-import com.github.tanxinzheng.framework.model.RestResponse;
+import com.github.tanxinzheng.framework.web.model.ErrorResult;
+import com.github.tanxinzheng.framework.model.Result;
 import com.github.tanxinzheng.framework.web.rest.FieldError;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -54,7 +54,7 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
                                                    HttpServletResponse response,
                                                    Exception e){
         logger.debug(e.getMessage(), e);
-        return ResponseEntity.badRequest().body(RestResponse.failed(BaseResultCode.BAD_PARAMETERS, e.getMessage()));
+        return ResponseEntity.badRequest().body(Result.failed(BaseResultCode.BAD_PARAMETERS, e.getMessage()));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -64,8 +64,8 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
                                                    HttpServletResponse response,
                                                    BusinessException exception){
         logger.error(exception.getMessage(), exception);
-        RestResponse restResponse = RestResponse.failed(BaseResultCode.BAD_PARAMETERS, MessageFormat.format("文件上传限制最大不能超过{0}M" , (maxUploadSize/1024)/1024));
-        return ResponseEntity.badRequest().body(restResponse);
+        Result result = Result.failed(BaseResultCode.BAD_PARAMETERS, MessageFormat.format("文件上传限制最大不能超过{0}M" , (maxUploadSize/1024)/1024));
+        return ResponseEntity.badRequest().body(result);
     }
 
 //    @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -75,8 +75,8 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
 //                                                                HttpServletResponse response,
 //                                                                 MethodArgumentNotValidException exception){
 //        logger.debug(exception.getMessage(), exception);
-//        ErrorRestResponse errorRestResponse = handleBindException(exception.getBindingResult(), exception);
-//        return ResponseEntity.badRequest().body(errorRestResponse);
+//        ErrorResult errorResult = handleBindException(exception.getBindingResult(), exception);
+//        return ResponseEntity.badRequest().body(errorResult);
 //    }
 //
 //    @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -86,8 +86,8 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
 //                                                                 HttpServletResponse response,
 //                                                                 BindException exception){
 //        logger.debug(exception.getMessage(), exception);
-//        ErrorRestResponse errorRestResponse = handleBindException(exception.getBindingResult(), exception);
-//        return ResponseEntity.badRequest().body(errorRestResponse);
+//        ErrorResult errorResult = handleBindException(exception.getBindingResult(), exception);
+//        return ResponseEntity.badRequest().body(errorResult);
 //    }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
@@ -97,7 +97,7 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
                                                                  HttpServletResponse response,
                                                                  AccessDeniedException exception){
         logger.debug(exception.getMessage(), exception);
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(RestResponse.failed(BaseResultCode.BAD_PARAMETERS, exception.getMessage()));
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.failed(BaseResultCode.BAD_PARAMETERS, exception.getMessage()));
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -108,7 +108,7 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
                                          Exception exception){
         String eventNo = DateTimeUtils.getDatetimeString(new Date()) + RandomStringUtils.randomNumeric(4);
         log.error("Event No: " + eventNo + " -> " + exception.getMessage(), exception);
-        RestResponse restError = RestResponse.failed(BaseResultCode.SYSTEM_ERROR, exception);
+        Result restError = Result.failed(BaseResultCode.SYSTEM_ERROR, exception);
         restError.setMessage("服务器内部异常，请联系管理员，异常事件编号：" + eventNo);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(restError);
     }
@@ -119,8 +119,8 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
      * @param ex
      * @return
      */
-    protected ErrorRestResponse handleBindException(BindingResult bindingResult, Exception ex) {
-        ErrorRestResponse restError = (ErrorRestResponse) ErrorRestResponse.failed(BaseResultCode.BAD_PARAMETERS, "请求参数校验不通过");
+    protected ErrorResult handleBindException(BindingResult bindingResult, Exception ex) {
+        ErrorResult restError = (ErrorResult) ErrorResult.failed(BaseResultCode.BAD_PARAMETERS, "请求参数校验不通过");
         BindingResult result = bindingResult;
         List<org.springframework.validation.FieldError> fieldErrors = result.getFieldErrors();
         List<FieldError> fieldErrorList = new ArrayList<FieldError>();

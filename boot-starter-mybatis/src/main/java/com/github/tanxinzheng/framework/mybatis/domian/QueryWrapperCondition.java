@@ -1,4 +1,4 @@
-package com.github.tanxinzheng.framework.model;
+package com.github.tanxinzheng.framework.mybatis.domian;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

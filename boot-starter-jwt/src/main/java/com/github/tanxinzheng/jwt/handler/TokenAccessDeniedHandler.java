@@ -1,23 +1,34 @@
 package com.github.tanxinzheng.jwt.handler;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tanxinzheng.framework.model.BaseResultCode;
-import com.github.tanxinzheng.framework.model.RestResponse;
+import com.github.tanxinzheng.framework.model.Result;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * 未授权资源异常处理
  */
+@Component
 public class TokenAccessDeniedHandler implements AccessDeniedHandler {
 
     private String errorPage;
+
+    @Resource
+    ObjectMapper objectMapper;
 
     /**
      * Handles an access denied failure.
@@ -43,9 +54,12 @@ public class TokenAccessDeniedHandler implements AccessDeniedHandler {
                 RequestDispatcher dispatcher = request.getRequestDispatcher(errorPage);
                 dispatcher.forward(request, response);
             }else {
-//                response.sendError(HttpServletResponse.SC_FORBIDDEN,
-//                        accessDeniedException.getMessage());
-                RestResponse.failed(BaseResultCode.SYSTEM_ERROR, accessDeniedException).toJSON(request, response);
+                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+                response.setCharacterEncoding("UTF-8");
+                response.setStatus(HttpStatus.FORBIDDEN.value());
+                OutputStream out = response.getOutputStream();
+                objectMapper.writeValue(out, Result.failed(BaseResultCode.SYSTEM_ERROR, accessDeniedException));
+                out.flush();
             }
         }
     }

@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.github.tanxinzheng.framework.constant.JwtConfigProperties;
 import com.github.tanxinzheng.framework.constant.TokenType;
-import com.github.tanxinzheng.framework.model.RestResponse;
+import com.github.tanxinzheng.framework.model.Result;
 import com.github.tanxinzheng.jwt.controller.dto.LoginRequest;
 import com.github.tanxinzheng.jwt.controller.dto.LoginResponse;
 import org.assertj.core.util.Lists;
@@ -79,7 +79,7 @@ public class JwtBaseTest {
         loginRequest.setUsername(username);
         loginRequest.setPassword("123456");
         String data = testRestTemplate.postForObject(this.base.toString() + "/auth/login", loginRequest, String.class);
-        RestResponse<LoginResponse> response = JSONObject.parseObject(data, new TypeReference<RestResponse<LoginResponse>>(){});
+        Result<LoginResponse> response = JSONObject.parseObject(data, new TypeReference<Result<LoginResponse>>(){});
         return TokenType.BEARER.getCode() + " " + response.getData().getAccessToken();
     }
 

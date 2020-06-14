@@ -1,20 +1,28 @@
 package com.github.tanxinzheng.jwt.support;
 
-import com.github.tanxinzheng.framework.model.RestResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.tanxinzheng.framework.model.Result;
 import com.github.tanxinzheng.jwt.exception.AuthErrorCode;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * Created by tanxinzheng on 17/12/12.
  */
+@Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
+
+    @Resource
+    ObjectMapper objectMapper;
 
     /**
      * Commences an authentication scheme.
@@ -32,7 +40,12 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
      * @param authException that caused the invocation
      */
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        RestResponse.failed(AuthErrorCode.UNAUTHORIZED, authException).toJSON(request, response, HttpStatus.UNAUTHORIZED);
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setCharacterEncoding("UTF-8");
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        OutputStream out = response.getOutputStream();
+        objectMapper.writeValue(out, Result.failed(AuthErrorCode.UNAUTHORIZED, authException));
+        out.flush();
     }
 }

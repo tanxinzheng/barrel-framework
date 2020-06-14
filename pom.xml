@@ -21,7 +21,8 @@
 		<module>boot-starter-jwt</module>
 		<module>boot-starter-redis</module>
 		<module>boot-starter-test</module>
-	</modules>
+        <module>boot-starter-mybatis</module>
+    </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

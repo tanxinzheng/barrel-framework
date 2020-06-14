@@ -1,7 +1,7 @@
 package com.github.tanxinzheng.jwt.exception;
 
 import com.github.tanxinzheng.framework.model.BaseResultCode;
-import com.github.tanxinzheng.framework.model.RestResponse;
+import com.github.tanxinzheng.framework.model.Result;
 import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
@@ -33,8 +33,8 @@ public class AuthExceptionHandler {
             CredentialsExpiredException.class
     })
     @ResponseBody
-    public RestResponse exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception ex) throws Exception {
-        RestResponse restError = RestResponse.failed(BaseResultCode.SYSTEM_ERROR, ex);
+    public Result exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception ex) throws Exception {
+        Result restError = Result.failed(BaseResultCode.SYSTEM_ERROR, ex);
         if(ex instanceof UsernameNotFoundException) {
             response.setStatus(HttpStatus.BAD_REQUEST.value());
         }else if(ex instanceof BadCredentialsException){

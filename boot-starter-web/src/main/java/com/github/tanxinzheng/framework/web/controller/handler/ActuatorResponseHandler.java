@@ -13,7 +13,7 @@ public class ActuatorResponseHandler implements ResponseBodyHandler {
      */
     @Override
     public boolean match(Object body, String url) {
-//        if(body instanceof RestResponse){
+//        if(body instanceof Result){
 //            return true;
 //        }
         return false;

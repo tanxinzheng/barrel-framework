@@ -1,7 +1,7 @@
 package com.github.tanxinzheng.boot.starter.web.test;
 
 import com.github.tanxinzheng.boot.starter.web.test.domain.DemoResponse;
-import com.github.tanxinzheng.framework.model.RestResponse;
+import com.github.tanxinzheng.framework.model.Result;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.springframework.boot.SpringApplication;
@@ -49,13 +49,13 @@ public class StarterWebTestApp {
      * @return
      */
     @GetMapping(value = "/origin")
-    public RestResponse origin(){
+    public Result origin(){
         Map<String, String> data = Maps.newHashMap();
         data.put("id", "123456");
         data.put("name", "测试");
-        RestResponse restResponse = RestResponse.success(data);
-        restResponse.setKeepOriginFormat(Boolean.TRUE);
-        return restResponse;
+        Result result = Result.success(data);
+        result.setKeepOriginFormat(Boolean.TRUE);
+        return result;
     }
 
     /**

@@ -1,20 +1,19 @@
-package com.github.tanxinzheng.framework.model;
+package com.github.tanxinzheng.framework.mybatis.domian;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.tanxinzheng.framework.utils.MybatisPlusUtils;
+import com.github.tanxinzheng.framework.model.BaseQuery;
+import com.github.tanxinzheng.framework.mybatis.utils.MybatisPlusUtils;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class QueryParams extends BaseQuery implements Serializable {
+public class QueryParams<T> extends BaseQuery implements Serializable {
 
     @ApiModelProperty(value = "查询参数")
     private List<QueryWrapperCondition> conditions;
@@ -24,8 +23,12 @@ public class QueryParams extends BaseQuery implements Serializable {
 
     @ApiModelProperty(hidden=true)
     @JsonIgnore
-    public QueryWrapper getQueryWrapper(){
+    public QueryWrapper<T> getQueryWrapper(){
         return MybatisPlusUtils.getQueryWrapper4Condition(this.conditions, this.sorts);
+    }
+
+    public IPage<T> getPage(){
+        return new Page<T>(this.getPageNum(), this.getPageSize());
     }
 
 }

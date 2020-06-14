@@ -2,7 +2,7 @@ package com.github.tanxinzheng.test;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.github.tanxinzheng.framework.model.RestResponse;
+import com.github.tanxinzheng.framework.model.Result;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.runner.RunWith;
@@ -36,7 +36,7 @@ public class TestAppController {
         return "Bearer XMO";
     }
 
-    protected <T> RestResponse<T> parseRestResponse(String resultJson){
-        return JSONObject.parseObject(resultJson, new TypeReference<RestResponse<T>>(){});
+    protected <T> Result<T> parseResult(String resultJson){
+        return JSONObject.parseObject(resultJson, new TypeReference<Result<T>>(){});
     }
 }

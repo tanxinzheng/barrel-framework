@@ -3,7 +3,7 @@ package com.github.tanxinzheng.boot.starter.web.test;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.github.tanxinzheng.framework.model.RestResponse;
+import com.github.tanxinzheng.framework.model.Result;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -54,8 +54,8 @@ public class WebTest {
                 .andDo(print())
                 .andExpect(status().isOk());
         String resultJson = actions.andReturn().getResponse().getContentAsString();
-        RestResponse restResponse = JSONObject.parseObject(resultJson, new TypeReference<RestResponse<String>>(){});
-        Assert.assertEquals("hello boot starter web", restResponse.getData());
+        Result result = JSONObject.parseObject(resultJson, new TypeReference<Result<String>>(){});
+        Assert.assertEquals("hello boot starter web", result.getData());
     }
 
     @Test
@@ -66,8 +66,8 @@ public class WebTest {
                 .andDo(print())
                 .andExpect(status().isOk());
         String resultJson = actions.andReturn().getResponse().getContentAsString();
-        RestResponse<Map<String, String>> restResponse = JSONObject.parseObject(resultJson, new TypeReference<RestResponse<Map<String, String>>>(){});
-        Assert.assertEquals("测试", restResponse.getData().get("name"));
+        Result<Map<String, String>> result = JSONObject.parseObject(resultJson, new TypeReference<Result<Map<String, String>>>(){});
+        Assert.assertEquals("测试", result.getData().get("name"));
     }
 
     @Test

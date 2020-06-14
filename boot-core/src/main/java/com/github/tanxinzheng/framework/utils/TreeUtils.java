@@ -1,6 +1,6 @@
 package com.github.tanxinzheng.framework.utils;
 
-import com.github.tanxinzheng.framework.model.TreeModel;
+import com.github.tanxinzheng.framework.model.TreeNode;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 
@@ -16,13 +16,13 @@ public class TreeUtils {
      * @param treeNodes 传入的树节点列表
      * @return
      */
-    public static List<TreeModel> build(List<TreeModel> treeNodes) {
-        List<TreeModel> trees = Lists.newArrayList();
-        for (TreeModel treeNode : treeNodes) {
+    public static List<TreeNode> build(List<TreeNode> treeNodes) {
+        List<TreeNode> trees = Lists.newArrayList();
+        for (TreeNode treeNode : treeNodes) {
             if (StringUtils.isBlank(treeNode.getParentId())) {
                 trees.add(treeNode);
             }
-            for (TreeModel it : treeNodes) {
+            for (TreeNode it : treeNodes) {
                 if (it.getParentId() == treeNode.getId()) {
                     if (treeNode.getChildren() == null) {
                         treeNode.setChildren(Lists.newArrayList());
@@ -39,9 +39,9 @@ public class TreeUtils {
      * @param treeNodes
      * @return
      */
-    public static List<TreeModel> buildByRecursive(List<TreeModel> treeNodes) {
-        List<TreeModel> trees = Lists.newArrayList();
-        for (TreeModel treeNode : treeNodes) {
+    public static List<TreeNode> buildByRecursive(List<TreeNode> treeNodes) {
+        List<TreeNode> trees = Lists.newArrayList();
+        for (TreeNode treeNode : treeNodes) {
             if (StringUtils.isBlank(treeNode.getParentId())) {
                 trees.add(findChildren(treeNode, treeNodes));
             }
@@ -54,8 +54,8 @@ public class TreeUtils {
      * @param treeNodes
      * @return
      */
-    public static TreeModel findChildren(TreeModel treeNode,List<TreeModel> treeNodes) {
-        for (TreeModel it : treeNodes) {
+    public static TreeNode findChildren(TreeNode treeNode, List<TreeNode> treeNodes) {
+        for (TreeNode it : treeNodes) {
             if(treeNode.getId().equals(it.getParentId())) {
                 if (treeNode.getChildren() == null) {
                     treeNode.setChildren(Lists.newArrayList());

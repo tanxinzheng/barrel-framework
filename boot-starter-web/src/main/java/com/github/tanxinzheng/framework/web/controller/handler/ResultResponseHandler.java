@@ -1,10 +1,10 @@
 package com.github.tanxinzheng.framework.web.controller.handler;
 
-import com.github.tanxinzheng.framework.model.RestResponse;
+import com.github.tanxinzheng.framework.model.Result;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ResultResponseHandler implements ResponseBodyHandler<RestResponse> {
+public class ResultResponseHandler implements ResponseBodyHandler<Result> {
     /**
      * 判断ResponseBody是否匹配类型
      *
@@ -14,7 +14,7 @@ public class ResultResponseHandler implements ResponseBodyHandler<RestResponse> 
      */
     @Override
     public boolean match(Object body, String url) {
-        if(body instanceof RestResponse){
+        if(body instanceof Result){
             return true;
         }
         return false;
@@ -27,7 +27,7 @@ public class ResultResponseHandler implements ResponseBodyHandler<RestResponse> 
      * @return
      */
     @Override
-    public Object doHandle(RestResponse body) {
+    public Object doHandle(Result body) {
         if(body != null && body.isKeepOriginFormat()){
             return body.getData();
         }
