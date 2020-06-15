@@ -83,7 +83,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         builder.serializationInclusion(JsonInclude.Include.NON_EMPTY);
         builder.timeZone("GMT+8");
         builder.simpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
         builder.deserializerByType(Date.class, new DateDeserializer());
         builder.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer());
         builder.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserialize());
@@ -124,6 +123,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 .defaultContentType(MediaType.APPLICATION_JSON)
                 .parameterName("format")
                 .favorParameter(true)
+                .favorPathExtension(false)
                 .ignoreUnknownPathExtensions(false)
                 .ignoreAcceptHeader(false);
     }

@@ -68,6 +68,11 @@
 				<version>${boot.fremework.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>com.github.tanxinzheng</groupId>
+				<artifactId>boot-starter-mybatis</artifactId>
+				<version>${boot.fremework.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-actuator</artifactId>
 				<version>${spring.boot.version}</version>

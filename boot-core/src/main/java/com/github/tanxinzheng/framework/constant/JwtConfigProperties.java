@@ -1,6 +1,5 @@
 package com.github.tanxinzheng.framework.constant;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,7 +10,6 @@ import java.time.ZoneOffset;
 /**
  * Created by tanxinzheng on 2018/9/20.
  */
-@Data
 @Configuration
 @ConfigurationProperties(prefix = "jwt")
 public class JwtConfigProperties {

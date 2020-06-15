@@ -1,4 +1,4 @@
-package com.github.tanxinzheng.framework.web.rest;
+package com.github.tanxinzheng.framework.web.controller;
 
 import com.github.tanxinzheng.framework.model.BaseResultCode;
 import com.github.tanxinzheng.framework.model.Result;

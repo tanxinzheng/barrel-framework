@@ -5,16 +5,16 @@ import com.github.tanxinzheng.framework.core.service.CurrentUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import javax.annotation.Resource;
+import java.time.LocalDateTime;
 
 @Slf4j
+@Component
 public class DefaultFillObjectHandler  implements MetaObjectHandler {
 
-    public DefaultFillObjectHandler(CurrentUserService currentUserService) {
-        this.currentUserService = currentUserService;
-    }
-
+    @Resource
     CurrentUserService currentUserService;
 
     @Override
@@ -27,12 +27,12 @@ public class DefaultFillObjectHandler  implements MetaObjectHandler {
             log.info("开始填充创建者CreateUser");
             this.setInsertFieldValByName("createdUserId", userId, metaObject);
             log.info("开始填充更新者UpdateUser");
-            this.setUpdateFieldValByName("updatedUserId", new Date(), metaObject);
+            this.setUpdateFieldValByName("updatedUserId", userId, metaObject);
         }
         log.info("开始填充插入时间InsertTime");
-        this.setInsertFieldValByName("createdTime", new Date(), metaObject);
+        this.setInsertFieldValByName("createdTime", LocalDateTime.now(), metaObject);
         log.info("开始填充更新时间UpdateTime");
-        this.setUpdateFieldValByName("updatedTime", new Date(), metaObject);
+        this.setUpdateFieldValByName("updatedTime", LocalDateTime.now(), metaObject);
     }
 
     @Override
@@ -40,9 +40,9 @@ public class DefaultFillObjectHandler  implements MetaObjectHandler {
         String userId = currentUserService.getCurrentUserId();
         if (StringUtils.isNotBlank(userId)) {
             log.info("开始填充更新者UpdateUser");
-            this.setUpdateFieldValByName("updatedUserId", new Date(), metaObject);
+            this.setUpdateFieldValByName("updatedUserId", LocalDateTime.now(), metaObject);
         }
         log.info("开始填充更新时间UpdateTime");
-        this.setUpdateFieldValByName("updatedTime", new Date(), metaObject);
+        this.setUpdateFieldValByName("updatedTime", LocalDateTime.now(), metaObject);
     }
 }

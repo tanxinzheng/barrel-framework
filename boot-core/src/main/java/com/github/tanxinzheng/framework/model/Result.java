@@ -67,9 +67,13 @@ public class Result<T> implements Serializable {
     }
 
     public static Result failed(ResultCode resultCode, String message) {
+        return failed(resultCode.getCode(), message);
+    }
+
+    public static Result failed(String code, String message) {
         Result result = new Result();
         result.setMessage(message);
-        result.setCode(resultCode.getCode());
+        result.setCode(code);
         result.setSuccess(Boolean.FALSE);
         return result;
     }
