@@ -1,11 +1,11 @@
 package com.github.tanxinzheng.framework.utils;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Date;
 
 public class DateTimeUtilsTest {
@@ -20,7 +20,7 @@ public class DateTimeUtilsTest {
 
     @Test
     public void getDatetimeString() {
-        String eventNo = DateTimeUtils.getDatetimeString(new Date()) + RandomStringUtils.randomNumeric(4);
-        Assert.assertTrue(eventNo.length() == 18);
+        long l = LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("+8")).toEpochMilli();
+        System.out.println(new Date(l));
     }
 }

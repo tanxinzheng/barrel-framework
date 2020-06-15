@@ -1,10 +1,11 @@
 package com.github.tanxinzheng.framework.web.controller.advice;
 
+import com.github.tanxinzheng.framework.exception.AuthException;
 import com.github.tanxinzheng.framework.exception.BusinessException;
 import com.github.tanxinzheng.framework.model.BaseResultCode;
+import com.github.tanxinzheng.framework.model.Result;
 import com.github.tanxinzheng.framework.utils.DateTimeUtils;
 import com.github.tanxinzheng.framework.web.model.ErrorResult;
-import com.github.tanxinzheng.framework.model.Result;
 import com.github.tanxinzheng.framework.web.rest.FieldError;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -13,9 +14,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
-import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -90,14 +89,26 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
 //        return ResponseEntity.badRequest().body(errorResult);
 //    }
 
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(AuthException.class)
+    @ResponseBody
+    ResponseEntity<Object> handleAuthException(HttpServletRequest request,
+                                               HttpServletResponse response,
+                                               AuthException exception){
+        logger.debug(exception.getMessage(), exception);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(Result.failed(BaseResultCode.UNAUTHORIZED, exception.getMessage()));
+    }
+
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseBody
     ResponseEntity<Object> handleAccessDeniedException(HttpServletRequest request,
-                                                                 HttpServletResponse response,
-                                                                 AccessDeniedException exception){
+                                                       HttpServletResponse response,
+                                                       AccessDeniedException exception){
         logger.debug(exception.getMessage(), exception);
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.failed(BaseResultCode.BAD_PARAMETERS, exception.getMessage()));
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(Result.failed(BaseResultCode.BAD_PARAMETERS, exception.getMessage()));
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

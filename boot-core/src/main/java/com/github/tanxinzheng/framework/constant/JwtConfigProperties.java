@@ -2,12 +2,17 @@ package com.github.tanxinzheng.framework.constant;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 
 /**
  * Created by tanxinzheng on 2018/9/20.
  */
 @Data
+@Configuration
 @ConfigurationProperties(prefix = "jwt")
 public class JwtConfigProperties {
 
@@ -28,10 +33,10 @@ public class JwtConfigProperties {
     private static final String DEFAULT_JWT_TOKEN_TYPE = TokenType.BEARER.getCode();
 
     // 默认 2小时
-    private static final long DEFAULT_JWT_EXPIRATION = 2L * 1000 * 60 * 60;
+    private static final long DEFAULT_JWT_EXPIRATION = LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("+8")).toEpochMilli();
 
-    // 默认 2周
-    private static final long DEFAULT_JWT_REFRESH_EXPIRATION = 2L * 7 * 24 * 1000 * 60 * 60;
+    // 默认 1周
+    private static final long DEFAULT_JWT_REFRESH_EXPIRATION = LocalDateTime.now().plusWeeks(1).toInstant(ZoneOffset.of("+8")).toEpochMilli();
 
     /**
      * JWT 认证请求头

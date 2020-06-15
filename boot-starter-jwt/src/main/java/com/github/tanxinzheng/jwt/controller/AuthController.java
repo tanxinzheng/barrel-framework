@@ -18,7 +18,6 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-
 @RestController
 @RequestMapping(value = "/auth")
 public class AuthController {
