@@ -17,4 +17,8 @@ public class BaseEntity implements Serializable {
     private Date updatedTime;
     private Integer dataVersion;
 
+    public <T> T toDTO(Class<T> clazz){
+        return null;
+    }
+
 }
