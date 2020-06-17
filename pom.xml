@@ -9,19 +9,19 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.tanxinzheng</groupId>
-	<artifactId>boot-framework</artifactId>
+	<artifactId>barrel-framework</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>boot-framework</name>
-	<description>Boot Framework</description>
+	<name>barrel-framework</name>
+	<description>barrel Framework</description>
 
 	<modules>
-		<module>boot-core</module>
-		<module>boot-starter-web</module>
-		<module>boot-starter-jwt</module>
-		<module>boot-starter-redis</module>
-		<module>boot-starter-test</module>
-        <module>boot-starter-mybatis</module>
+		<module>barrel-core</module>
+		<module>barrel-starter-web</module>
+		<module>barrel-starter-jwt</module>
+		<module>barrel-starter-redis</module>
+		<module>barrel-starter-test</module>
+        <module>barrel-starter-mybatis</module>
     </modules>
 
 	<properties>
@@ -54,22 +54,22 @@
 		<dependencies>
 			<dependency>
 				<groupId>com.github.tanxinzheng</groupId>
-				<artifactId>boot-core</artifactId>
+				<artifactId>barrel-core</artifactId>
 				<version>${boot.fremework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.github.tanxinzheng</groupId>
-				<artifactId>boot-starter-jwt</artifactId>
+				<artifactId>barrel-starter-jwt</artifactId>
 				<version>${boot.fremework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.github.tanxinzheng</groupId>
-				<artifactId>boot-starter-web</artifactId>
+				<artifactId>barrel-starter-web</artifactId>
 				<version>${boot.fremework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.github.tanxinzheng</groupId>
-				<artifactId>boot-starter-mybatis</artifactId>
+				<artifactId>barrel-starter-mybatis</artifactId>
 				<version>${boot.fremework.version}</version>
 			</dependency>
 			<dependency>
