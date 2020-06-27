@@ -16,7 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.nio.file.AccessDeniedException;
 import java.text.MessageFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -43,8 +46,6 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
 
 //    @Value(value = "${spring.servlet.multipart.max-file-size}")
     private Long maxUploadSize = 102400l;
-
-
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = {
@@ -70,27 +71,18 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
         return ResponseEntity.badRequest().body(result);
     }
 
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    @ResponseBody
-//    ResponseEntity<Object> handleMethodArgumentNotValidException(HttpServletRequest request,
-//                                                                HttpServletResponse response,
-//                                                                 MethodArgumentNotValidException exception){
-//        logger.debug(exception.getMessage(), exception);
-//        ErrorResult errorResult = handleBindException(exception.getBindingResult(), exception);
-//        return ResponseEntity.badRequest().body(errorResult);
-//    }
-//
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @ExceptionHandler(BindException.class)
-//    @ResponseBody
-//    ResponseEntity<Object> doHandleBindException(HttpServletRequest request,
-//                                                                 HttpServletResponse response,
-//                                                                 BindException exception){
-//        logger.debug(exception.getMessage(), exception);
-//        ErrorResult errorResult = handleBindException(exception.getBindingResult(), exception);
-//        return ResponseEntity.badRequest().body(errorResult);
-//    }
+    @Override
+    public ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        ErrorResult errorResult = handleBindException(ex.getBindingResult(), ex);
+        return ResponseEntity.badRequest().body(errorResult);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        logger.debug(ex.getMessage(), ex);
+        ErrorResult errorResult = handleBindException(ex.getBindingResult(), ex);
+        return ResponseEntity.badRequest().body(errorResult);
+    }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(AuthException.class)
@@ -134,7 +126,10 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
      * @return
      */
     protected ErrorResult handleBindException(BindingResult bindingResult, Exception ex) {
-        ErrorResult restError = (ErrorResult) ErrorResult.failed(BaseResultCode.BAD_PARAMETERS, "请求参数校验不通过");
+        ErrorResult restError = new ErrorResult();
+        restError.setCode(BaseResultCode.BAD_PARAMETERS.getCode());
+        restError.setSuccess(Boolean.FALSE);
+        restError.setTimestamp(LocalDateTime.now());
         BindingResult result = bindingResult;
         List<org.springframework.validation.FieldError> fieldErrors = result.getFieldErrors();
         List<FieldError> fieldErrorList = new ArrayList<FieldError>();

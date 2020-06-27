@@ -1,6 +1,5 @@
 package com.github.tanxinzheng.framework.web.controller;
 
-import com.github.tanxinzheng.framework.model.BaseResultCode;
 import com.github.tanxinzheng.framework.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
@@ -73,7 +72,7 @@ public class BaseErrorController extends AbstractErrorController {
             return new ResponseEntity<Result>(status);
         }
         Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request, MediaType.ALL));
-        Result result = Result.failed(BaseResultCode.SYSTEM_ERROR, (String) body.get("message"));
+        Result result = Result.failed(String.valueOf(status.value()), (String) body.get("message"));
         return new ResponseEntity<>(result, status);
     }
 

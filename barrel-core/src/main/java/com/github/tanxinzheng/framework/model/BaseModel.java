@@ -1,7 +1,7 @@
 package com.github.tanxinzheng.framework.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by jengt_000 on 2014/12/28.
@@ -11,11 +11,11 @@ public class BaseModel implements Serializable {
     /** 创建人 */
     private String createdUserId;
     /** 创建时间 */
-    private Date createdTime;
+    private LocalDateTime createdTime;
     /** 更新人 */
     private String updatedUserId;
     /** 更新时间 */
-    private Date updatedTime;
+    private LocalDateTime updatedTime;
     /** 数据版本号 */
     private Integer dataVersion;
 
@@ -27,11 +27,11 @@ public class BaseModel implements Serializable {
         this.createdUserId = createdUserId;
     }
 
-    public Date getCreatedTime() {
+    public LocalDateTime getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Date createdTime) {
+    public void setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
 
@@ -43,11 +43,11 @@ public class BaseModel implements Serializable {
         this.updatedUserId = updatedUserId;
     }
 
-    public Date getUpdatedTime() {
+    public LocalDateTime getUpdatedTime() {
         return updatedTime;
     }
 
-    public void setUpdatedTime(Date updatedTime) {
+    public void setUpdatedTime(LocalDateTime updatedTime) {
         this.updatedTime = updatedTime;
     }
 

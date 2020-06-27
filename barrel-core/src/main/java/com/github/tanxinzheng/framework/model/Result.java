@@ -6,9 +6,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -46,40 +43,36 @@ public class Result<T> implements Serializable {
     }
 
 
-    public static Result success(Object data, String message) {
-        Result result = new Result(data);
+    public static <T> Result<T> success(T data, String message) {
+        Result<T> result = new Result<T>(data);
         result.setMessage(message);
         result.setCode(BaseResultCode.OK.getCode());
         result.setSuccess(Boolean.TRUE);
         return result;
     }
 
-    public static Result success(Object data) {
+    public static <T> Result<T> success(T data) {
         return success(data, "SUCCESS");
     }
 
-    public static Result failed(ResultCode resultCode) {
+    public static <T> Result<T> failed(ResultCode resultCode) {
         return failed(resultCode, resultCode.getCode());
     }
 
-    public static Result failed(ResultCode resultCode, Exception ex) {
+    public static <T> Result<T> failed(ResultCode resultCode, Exception ex) {
         return failed(resultCode, ex.getMessage());
     }
 
-    public static Result failed(ResultCode resultCode, String message) {
+    public static <T> Result<T> failed(ResultCode resultCode, String message) {
         return failed(resultCode.getCode(), message);
     }
 
-    public static Result failed(String code, String message) {
-        Result result = new Result();
+    public static <T> Result<T> failed(String code, String message) {
+        Result<T> result = new Result<T>();
         result.setMessage(message);
         result.setCode(code);
         result.setSuccess(Boolean.FALSE);
         return result;
-    }
-
-    public void toJSON(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        toJSON(request, response);
     }
 
 

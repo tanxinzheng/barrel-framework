@@ -5,29 +5,31 @@ import com.github.tanxinzheng.framework.core.service.CurrentUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.context.ApplicationContextInitializer;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.time.LocalDateTime;
 
 @Slf4j
 @Component
-public class DefaultFillObjectHandler  implements MetaObjectHandler {
+public class DefaultFillObjectHandler  implements MetaObjectHandler, ApplicationContextInitializer {
 
-    @Resource
     CurrentUserService currentUserService;
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        String userId = currentUserService.getCurrentUserId();
-        if(StringUtils.isBlank(userId)){
+        String userId = null;
+        if(currentUserService != null){
+            userId = currentUserService.getCurrentUserId();
+        }else{
             userId = "SYSTEM";
         }
         if (StringUtils.isNotBlank(userId)) {
             log.info("开始填充创建者CreateUser");
-            this.setInsertFieldValByName("createdUserId", userId, metaObject);
+            this.setInsertFieldValByName("createdBy", userId, metaObject);
             log.info("开始填充更新者UpdateUser");
-            this.setUpdateFieldValByName("updatedUserId", userId, metaObject);
+            this.setUpdateFieldValByName("updatedBy", userId, metaObject);
         }
         log.info("开始填充插入时间InsertTime");
         this.setInsertFieldValByName("createdTime", LocalDateTime.now(), metaObject);
@@ -44,5 +46,10 @@ public class DefaultFillObjectHandler  implements MetaObjectHandler {
         }
         log.info("开始填充更新时间UpdateTime");
         this.setUpdateFieldValByName("updatedTime", LocalDateTime.now(), metaObject);
+    }
+
+    @Override
+    public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
+        this.currentUserService = configurableApplicationContext.getBean(CurrentUserService.class);
     }
 }

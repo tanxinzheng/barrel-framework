@@ -4,40 +4,26 @@ package com.github.tanxinzheng.framework.exception;
  * business logic exception
  * Created by tanxinzheng on 16/10/22.
  */
-public class BusinessException extends RuntimeException {
+public class BusinessException extends BaseException {
 
     /**
-     * Creates a new BusinessException object.
+     * 参数格式化错误信息
+     *
+     * @param message 信息
+     * @param args    格式化参数
      */
-    public BusinessException() {
-        super();
+    public BusinessException(String message, Object... args) {
+        super(message, args);
     }
 
     /**
-     * Constructs a new invalid parameter exception with the specified detail message.
-     * @param message exception message
+     * 参数格式化错误信息
+     *
+     * @param message 信息
+     * @param cause   异常原因
+     * @param args    格式化参数
      */
-    public BusinessException(final String message) {
-        super(message);
-    }
-
-    /**
-     * Constructs a new invalid parameter exception with the specified detail message and cause.
-     * @param message exception message
-     * @param cause exception cause
-     */
-    public BusinessException(final String message, final Throwable cause) {
-        super(message, cause);
-    }
-
-    /**
-     * Constructs a new invalid parameter exception with the specified cause and a
-     * detail message of <tt>(cause==null ? null : cause.toString())</tt>
-     * (which typically contains the class and detail message of
-     * <tt>cause</tt>).
-     * @param cause exception cause
-     */
-    public BusinessException(final Throwable cause) {
-        super(cause);
+    public BusinessException(String message, Throwable cause, Object... args) {
+        super(message, cause, args);
     }
 }

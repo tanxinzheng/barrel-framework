@@ -24,6 +24,8 @@ public class AuthUser implements Serializable {
     private String salt;
     @ApiModelProperty(value = "电子邮箱")
     private String email;
+    @ApiModelProperty(value = "手机号码")
+    private String phoneNumber;
     @ApiModelProperty(value = "是否禁用")
     private boolean disable;
     @ApiModelProperty(value = "头像")

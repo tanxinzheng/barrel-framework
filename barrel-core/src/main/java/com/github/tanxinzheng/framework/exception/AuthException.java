@@ -1,12 +1,12 @@
 package com.github.tanxinzheng.framework.exception;
 
-public class AuthException extends RuntimeException {
+public class AuthException extends BaseException {
 
-    /**
-     * Constructs a new invalid parameter exception with the specified detail message.
-     * @param message exception message
-     */
-    public AuthException(final String message) {
-        super(message);
+    public AuthException(String message, Object... args) {
+        super(message, args);
+    }
+
+    public AuthException(String message, Throwable cause, Object... args) {
+        super(message, cause, args);
     }
 }
