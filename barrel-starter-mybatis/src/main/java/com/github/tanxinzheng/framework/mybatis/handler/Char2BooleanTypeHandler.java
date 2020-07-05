@@ -2,6 +2,7 @@ package com.github.tanxinzheng.framework.mybatis.handler;
 
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
+import org.springframework.stereotype.Component;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 /**
  * Created by tanxinzheng on 16/10/15.
  */
+@Component
 public class Char2BooleanTypeHandler implements TypeHandler<Boolean> {
 
     private static final String CHAR_TRUE = "Y";
@@ -40,7 +42,7 @@ public class Char2BooleanTypeHandler implements TypeHandler<Boolean> {
      * @throws SQLException
      */
     public Boolean getResult(ResultSet resultSet, String columnName) throws SQLException {
-        return tranferType(resultSet.getString(columnName)) ;
+        return transferType(resultSet.getString(columnName)) ;
     }
 
     /**
@@ -51,7 +53,7 @@ public class Char2BooleanTypeHandler implements TypeHandler<Boolean> {
      * @throws SQLException
      */
     public Boolean getResult(ResultSet resultSet, int i) throws SQLException {
-        return tranferType(resultSet.getString(i) );
+        return transferType(resultSet.getString(i) );
     }
 
     /**
@@ -62,10 +64,10 @@ public class Char2BooleanTypeHandler implements TypeHandler<Boolean> {
      * @throws SQLException
      */
     public Boolean getResult(CallableStatement callableStatement, int columnIndex) throws SQLException {
-        return tranferType(callableStatement.getString(columnIndex));
+        return transferType(callableStatement.getString(columnIndex));
     }
 
-    private Boolean tranferType(String s){
+    private Boolean transferType(String s){
         if(CHAR_TRUE.equalsIgnoreCase(s)){
             return Boolean.TRUE;
         }else{

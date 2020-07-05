@@ -1,6 +1,5 @@
 package com.github.tanxinzheng.framework.secure.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -16,10 +15,8 @@ public class AuthUser implements Serializable {
     private String id;
     @ApiModelProperty(value = "用户名")
     private String username;
-    @JsonIgnore
     @ApiModelProperty(value = "密码")
     private String password;
-    @JsonIgnore
     @ApiModelProperty(value = "盐码")
     private String salt;
     @ApiModelProperty(value = "电子邮箱")

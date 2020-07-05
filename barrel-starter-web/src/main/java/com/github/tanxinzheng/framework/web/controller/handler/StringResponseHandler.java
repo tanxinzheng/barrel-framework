@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 @Component
-public class PageResponseHandler implements ResponseBodyHandler<String> {
+public class StringResponseHandler implements ResponseBodyHandler<String> {
 
     @Resource
     ObjectMapper objectMapper;
@@ -24,6 +24,10 @@ public class PageResponseHandler implements ResponseBodyHandler<String> {
     @Override
     public boolean match(Object body, String url) {
         if(body instanceof Result){
+            Result result = (Result) body;
+            if(null != result.getData() && result.getData() instanceof String){
+                return true;
+            }
             return true;
         }
         return false;
