@@ -40,6 +40,12 @@ public class AssertValid extends Assert {
         }
     }
 
+    public static void notBlank(@Nullable String text, String message, Object... args) {
+        if (org.apache.commons.lang3.StringUtils.isBlank(text)) {
+            throw new IllegalStateException(MessageFormatter.arrayFormat(message, args).getMessage());
+        }
+    }
+
     public static void hasLength(@Nullable String text, String message, Object... args) {
         if (!StringUtils.hasLength(text)) {
             throw new IllegalStateException(MessageFormatter.arrayFormat(message, args).getMessage());
