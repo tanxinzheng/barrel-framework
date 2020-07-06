@@ -1,5 +1,6 @@
 package com.github.tanxinzheng.framework.web.controller.advice;
 
+import com.github.tanxinzheng.framework.exception.ApiException;
 import com.github.tanxinzheng.framework.exception.AuthException;
 import com.github.tanxinzheng.framework.exception.BusinessException;
 import com.github.tanxinzheng.framework.model.BaseResultCode;
@@ -50,6 +51,7 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = {
             BusinessException.class,
+            ApiException.class,
             IllegalArgumentException.class
     })
     @ResponseBody
