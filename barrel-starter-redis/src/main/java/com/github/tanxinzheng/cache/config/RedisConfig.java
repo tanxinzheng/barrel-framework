@@ -2,9 +2,6 @@ package com.github.tanxinzheng.cache.config;
 
 import com.alibaba.fastjson.parser.ParserConfig;
 import com.github.tanxinzheng.cache.serializer.FastJsonRedisSerializer;
-import io.lettuce.core.internal.HostAndPort;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -23,8 +20,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.time.Duration;
-import java.util.HashSet;
-import java.util.Set;
 
 @Configuration
 @EnableCaching
