@@ -96,7 +96,7 @@ public class JwtUtils {
      *
      * @param token       客户端传入的token
      */
-    public boolean validateToken(String token, String secret) throws ExpiredJwtException, SignatureException {
+    public static boolean validateToken(String token, String secret) throws ExpiredJwtException, SignatureException {
         try {
             Claims claims = Jwts.parser()
                     .setSigningKey(secret)

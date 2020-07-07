@@ -29,7 +29,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.github.tanxinzheng.module."))
+                .apis(RequestHandlerSelectors.basePackage("com.github.tanxinzheng."))
                 .paths(PathSelectors.any())
                 .build()
                 .securitySchemes(securitySchemes())
