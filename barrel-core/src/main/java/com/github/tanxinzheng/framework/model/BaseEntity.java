@@ -16,8 +16,4 @@ public class BaseEntity implements Serializable {
     private String updatedBy;
     private LocalDateTime updatedTime;
 
-    public <T> T toDTO(Class<T> clazz){
-        return null;
-    }
-
 }
