@@ -9,18 +9,21 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.tanxinzheng</groupId>
-	<artifactId>boot-parent</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<artifactId>barrel-framework</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>boot-parent</name>
-	<description>Boot Parent</description>
+	<name>barrel-framework</name>
+	<description>barrel Framework</description>
 
 	<modules>
-		<module>boot-core</module>
-		<module>boot-starter-web</module>
-		<module>boot-starter-jwt</module>
-		<module>boot-starter-redis</module>
-	</modules>
+		<module>barrel-core</module>
+		<module>barrel-starter-web</module>
+		<module>barrel-starter-jwt</module>
+		<module>barrel-starter-redis</module>
+		<module>barrel-starter-test</module>
+        <module>barrel-starter-mybatis</module>
+        <module>barrel-starter-cloud</module>
+    </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,122 +31,69 @@
 		<java.version>1.8</java.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<spring-cloud.version>Camden.SR5</spring-cloud.version>
+		<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
 		<boot.fremework.version>1.0.0-SNAPSHOT</boot.fremework.version>
-		<spring.boot.version>2.2.0.RELEASE</spring.boot.version>
+		<spring.boot.version>2.2.6.RELEASE</spring.boot.version>
+		<spring.cloud.dependencies.version>Hoxton.SR3</spring.cloud.dependencies.version>
+		<spring.cloud.version>2.2.2.RELEASE</spring.cloud.version>
+		<alibaba.cloud.version>2.2.1.RELEASE</alibaba.cloud.version>
 		<io.springfox.version>2.9.2</io.springfox.version>
 		<skipNpmBuild>false</skipNpmBuild>
 <!--		<skipTests>false</skipTests>-->
 	</properties>
-
-	<distributionManagement>
-		<repository>
-			<id>releases</id>
-			<url>https://devrepo.devcloud.cn-east-3.huaweicloud.com/04/nexus/content/repositories/06b7e0d466000f230f4dc01512fb70e0_1_0/</url>
-		</repository>
-		<snapshotRepository>
-			<id>snapshots</id>
-			<url>https://devrepo.devcloud.cn-east-3.huaweicloud.com/04/nexus/content/repositories/06b7e0d466000f230f4dc01512fb70e0_2_0/</url>
-		</snapshotRepository>
-	</distributionManagement>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>maven-net-cn</id>
-			<name>Maven China Mirror</name>
-			<url>https://repo.huaweicloud.com/repository/maven/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
 
 	<dependencies>
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>com.google.collections</groupId>-->
-<!--			<artifactId>google-collections</artifactId>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.apache.commons</groupId>-->
-<!--			<artifactId>commons-lang3</artifactId>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>commons-collections</groupId>-->
-<!--			<artifactId>commons-collections</artifactId>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.projectlombok</groupId>-->
-<!--			<artifactId>lombok</artifactId>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-web</artifactId>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>io.springfox</groupId>-->
-<!--			<artifactId>springfox-swagger2</artifactId>-->
-<!--		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
-<!--			<dependency>-->
-<!--				<groupId>com.github.tanxinzheng</groupId>-->
-<!--				<artifactId>boot-core</artifactId>-->
-<!--				<version>1.0.1-SNAPSHOT</version>-->
-<!--			</dependency>-->
-<!--			<dependency>-->
-<!--				<groupId>com.github.tanxinzheng</groupId>-->
-<!--				<artifactId>boot-support-store</artifactId>-->
-<!--				<version>1.0.1-SNAPSHOT</version>-->
-<!--			</dependency>-->
-<!--			<dependency>-->
-<!--				<groupId>com.github.tanxinzheng</groupId>-->
-<!--				<artifactId>boot-module-translate</artifactId>-->
-<!--				<version>1.0.1-SNAPSHOT</version>-->
-<!--			</dependency>-->
-<!--			<dependency>-->
-<!--				<groupId>com.github.tanxinzheng</groupId>-->
-<!--				<artifactId>boot-module-common</artifactId>-->
-<!--				<version>1.0.1-SNAPSHOT</version>-->
-<!--			</dependency>-->
-<!--			<dependency>-->
-<!--				<groupId>com.github.tanxinzheng</groupId>-->
-<!--				<artifactId>boot-module-auth</artifactId>-->
-<!--				<version>1.0.1-SNAPSHOT</version>-->
-<!--			</dependency>-->
-<!--			<dependency>-->
-<!--				<groupId>com.github.tanxinzheng</groupId>-->
-<!--				<artifactId>boot-module-account</artifactId>-->
-<!--				<version>1.0.1-SNAPSHOT</version>-->
-<!--			</dependency>-->
-<!--			<dependency>-->
-<!--				<groupId>com.github.tanxinzheng</groupId>-->
-<!--				<artifactId>boot-module-logger</artifactId>-->
-<!--				<version>1.0.1-SNAPSHOT</version>-->
-<!--			</dependency>-->
-<!--			<dependency>-->
-<!--				<groupId>com.github.tanxinzheng</groupId>-->
-<!--				<artifactId>boot-module-jwt</artifactId>-->
-<!--				<version>1.0.1-SNAPSHOT</version>-->
-<!--			</dependency>-->
-<!--			<dependency>-->
-<!--				<groupId>com.github.tanxinzheng</groupId>-->
-<!--				<artifactId>boot-starter-test</artifactId>-->
-<!--				<version>1.0.1-SNAPSHOT</version>-->
-<!--			</dependency>-->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring.cloud.dependencies.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba.cloud</groupId>
+				<artifactId>spring-cloud-alibaba-dependencies</artifactId>
+				<version>${alibaba.cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.github.tanxinzheng</groupId>
+				<artifactId>barrel-core</artifactId>
+				<version>${boot.fremework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.tanxinzheng</groupId>
+				<artifactId>barrel-starter-jwt</artifactId>
+				<version>${boot.fremework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.tanxinzheng</groupId>
+				<artifactId>barrel-starter-web</artifactId>
+				<version>${boot.fremework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.tanxinzheng</groupId>
+				<artifactId>barrel-starter-mybatis</artifactId>
+				<version>${boot.fremework.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-actuator</artifactId>
@@ -164,6 +114,16 @@
 <!--				<artifactId>mybatis-spring-boot-starter</artifactId>-->
 <!--				<version>2.0.2</version>-->
 <!--			</dependency>-->
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib-nodep</artifactId>
+				<version>2.2.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-pool2</artifactId>
+				<version>2.8.0</version>
+			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context-support</artifactId>
@@ -247,7 +207,7 @@
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
-				<version>5.1.47</version>
+				<version>8.0.16</version>
 			</dependency>
 			<dependency>
 				<groupId>com.qcloud</groupId>
@@ -428,11 +388,14 @@
 <!--					</transformationSets>-->
 <!--				</configuration>-->
 <!--			</plugin>-->
-<!--			<plugin>-->
-<!--				<groupId>org.apache.maven.plugins</groupId>-->
-<!--				<artifactId>maven-surefire-plugin</artifactId>-->
-<!--				<version>2.5</version>-->
-<!--			</plugin>-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
