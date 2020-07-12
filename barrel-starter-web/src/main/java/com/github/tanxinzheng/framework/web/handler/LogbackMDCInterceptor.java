@@ -19,7 +19,7 @@ public class LogbackMDCInterceptor extends HandlerInterceptorAdapter {
     /**
      * 会话ID
      */
-    private final static String USERNAME = "username";
+    private final static String USERNAME = "userId";
     private final static String REQUEST_ID = "requestId";
 
     @Override

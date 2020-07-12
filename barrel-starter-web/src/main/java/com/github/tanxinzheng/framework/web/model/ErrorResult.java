@@ -7,8 +7,14 @@ import lombok.Data;
  * Created by tanxinzheng on 2018/9/27.
  */
 @Data
-public class ErrorResult<T> extends Result {
+public class ErrorResult<T> extends Result<T> {
 
     private Object error;
 
+    public ErrorResult() {
+    }
+
+    public ErrorResult(T data) {
+        super(data);
+    }
 }

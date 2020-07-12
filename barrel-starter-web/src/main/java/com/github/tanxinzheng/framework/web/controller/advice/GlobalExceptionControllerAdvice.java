@@ -116,8 +116,12 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
                                          Exception exception){
         String eventNo = DateTimeUtils.getDatetimeString(new Date()) + RandomStringUtils.randomNumeric(4);
         log.error("Event No: " + eventNo + " -> " + exception.getMessage(), exception);
-        Result restError = Result.failed(BaseResultCode.SYSTEM_ERROR, exception);
+        ErrorResult restError = new ErrorResult();
+        restError.setCode(BaseResultCode.SYSTEM_ERROR.getCode());
+        restError.setTimestamp(LocalDateTime.now());
+        restError.setSuccess(Boolean.FALSE);
         restError.setMessage("服务器内部异常，请联系管理员，异常事件编号：" + eventNo);
+        restError.setError(exception.getLocalizedMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(restError);
     }
 
