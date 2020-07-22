@@ -29,6 +29,4 @@ public class AuthUser implements Serializable {
     private String avatar = "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png";
     @ApiModelProperty(value = "所属角色组")
     private List<String> roles;
-    @ApiModelProperty(value = "账户是否锁定")
-    private boolean accountNonLocked;
 }

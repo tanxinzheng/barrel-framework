@@ -9,22 +9,22 @@ import java.time.LocalDateTime;
 public class BaseModel implements Serializable {
 
     /** 创建人 */
-    private String createdUserId;
+    private String createdBy;
     /** 创建时间 */
     private LocalDateTime createdTime;
     /** 更新人 */
-    private String updatedUserId;
+    private String updatedBy;
     /** 更新时间 */
     private LocalDateTime updatedTime;
     /** 数据版本号 */
     private Integer dataVersion;
 
-    public String getCreatedUserId() {
-        return createdUserId;
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public void setCreatedUserId(String createdUserId) {
-        this.createdUserId = createdUserId;
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
     public LocalDateTime getCreatedTime() {
@@ -35,12 +35,12 @@ public class BaseModel implements Serializable {
         this.createdTime = createdTime;
     }
 
-    public String getUpdatedUserId() {
-        return updatedUserId;
+    public String getUpdatedBy() {
+        return updatedBy;
     }
 
-    public void setUpdatedUserId(String updatedUserId) {
-        this.updatedUserId = updatedUserId;
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
     }
 
     public LocalDateTime getUpdatedTime() {
