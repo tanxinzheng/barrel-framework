@@ -4,7 +4,7 @@ public class TokenConstant {
 
     public final static String SIGN_KEY = "Barrel";
     public final static String AVATAR = "avatar";
-    public final static String HEADER = "barrel-auth";
+    public final static String HEADER = "barrel-system";
     public final static String BEARER = "bearer";
     public final static String ACCESS_TOKEN = "access_token";
     public final static String REFRESH_TOKEN = "refresh_token";

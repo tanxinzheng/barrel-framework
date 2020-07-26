@@ -29,7 +29,7 @@ public class CloudExceptionControllerAdvice extends ResponseEntityExceptionHandl
     ResponseEntity<Object> handleBusinessException(HttpServletRequest request,
                                                    HttpServletResponse response,
                                                    FeignException e){
-        logger.debug(e.getMessage(), e);
+        logger.error(e.getMessage(), e);
         return ResponseEntity.status(e.status()).body(e.responseBody());
     }
 }

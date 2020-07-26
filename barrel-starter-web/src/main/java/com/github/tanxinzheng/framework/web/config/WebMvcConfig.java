@@ -10,6 +10,7 @@ import com.github.tanxinzheng.framework.web.dictionary.AccountJsonSerializer;
 import com.github.tanxinzheng.framework.web.dictionary.DictionaryAnnotationIntrospector;
 import com.github.tanxinzheng.framework.web.dictionary.DictionaryJsonSerializer;
 import com.github.tanxinzheng.framework.web.handler.LogbackMDCInterceptor;
+import com.github.tanxinzheng.framework.web.handler.LoginUserResolver;
 import com.github.tanxinzheng.framework.web.json.DateDeserializer;
 import com.github.tanxinzheng.framework.web.json.LocalDateTimeDeserialize;
 import com.github.tanxinzheng.framework.web.json.LocalDateTimeSerializer;
@@ -31,6 +32,7 @@ import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -45,9 +47,12 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Autowired
     ApplicationContext applicationContext;
 
+    @Resource
+    LoginUserResolver loginUserResolver;
+
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        System.out.println();
+        argumentResolvers.add(loginUserResolver);
     }
 
     /**

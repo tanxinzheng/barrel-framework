@@ -1,9 +1,12 @@
 package com.github.tanxinzheng.framework.web.dictionary.impl;
 
 import com.github.tanxinzheng.framework.web.dictionary.DictionaryTransferService;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+@Component
 public class DictionaryTransferServiceImpl implements DictionaryTransferService {
     /**
      * 翻译

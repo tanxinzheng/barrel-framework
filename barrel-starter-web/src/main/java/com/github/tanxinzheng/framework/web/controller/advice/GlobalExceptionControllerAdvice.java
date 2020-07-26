@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
+import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
@@ -83,6 +84,14 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         logger.debug(ex.getMessage(), ex);
         ErrorResult errorResult = handleBindException(ex.getBindingResult(), ex);
+        return ResponseEntity.badRequest().body(errorResult);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMissingServletRequestPart(
+            MissingServletRequestPartException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        logger.debug(ex.getMessage(), ex);
+        Result errorResult = Result.failed(BaseResultCode.BAD_PARAMETERS, ex.getMessage());
         return ResponseEntity.badRequest().body(errorResult);
     }
 

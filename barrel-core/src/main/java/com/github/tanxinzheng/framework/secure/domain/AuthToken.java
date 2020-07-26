@@ -16,9 +16,11 @@ public class AuthToken implements Serializable {
     @ApiModelProperty(value = "刷新令牌")
     private String refreshToken;
     @ApiModelProperty(value = "头像")
-    private String avatar = "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png";
+    private String avatar;
     @ApiModelProperty(value = "角色名")
     private String authority;
+    @ApiModelProperty(value = "用户ID")
+    private String userId;
     @ApiModelProperty(value = "用户名")
     private String username;
     @ApiModelProperty(value = "过期时间")

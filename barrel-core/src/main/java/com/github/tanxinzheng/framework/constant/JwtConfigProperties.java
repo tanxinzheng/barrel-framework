@@ -87,12 +87,12 @@ public class JwtConfigProperties {
     private String secret;
 
     /**
-     * 有效时间
+     * 有效时间，时间单位：毫秒
      */
     private Long expiration;
 
     /**
-     * refresh token 有效时间
+     * refresh token 有效时间，时间单位：毫秒
      */
     private Long refreshTokenExpiration;
 

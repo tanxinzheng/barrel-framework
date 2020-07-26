@@ -15,6 +15,8 @@ public class AuthUser implements Serializable {
     private String id;
     @ApiModelProperty(value = "用户名")
     private String username;
+    @ApiModelProperty(value = "姓名")
+    private String nickname;
     @ApiModelProperty(value = "密码")
     private String password;
     @ApiModelProperty(value = "盐码")

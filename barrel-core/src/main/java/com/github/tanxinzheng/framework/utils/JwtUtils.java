@@ -1,6 +1,7 @@
 package com.github.tanxinzheng.framework.utils;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.impl.DefaultJwtBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -57,38 +58,10 @@ public class JwtUtils {
      * @param secret
      * @return
      */
-    public static Claims parseToken(String token, String secret){
-        Jws<Claims> claimsJws = Jwts.parser()
+    public static Jws<Claims> parseToken(String token, String secret) throws SignatureException {
+        return Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token);
-        return claimsJws.getBody();
-    }
-
-    /**
-     * 获取Claims
-     * @param token
-     * @param secret
-     * @return
-     */
-    public Claims getClaimsByToken(String token, String secret){
-        if(!validateToken(token, secret)){
-            return null;
-        }
-        return Jwts.parser()
-                    .setSigningKey(secret)
-                    .parseClaimsJws(token)
-                    .getBody();
-    }
-
-    /**
-     * 获取Claims
-     * @param token
-     * @param secret
-     * @return
-     */
-    public String getUsernameByToken(String token, String secret){
-        Claims claims = getClaimsByToken(token, secret);
-        return claims.getSubject();
     }
 
     /**

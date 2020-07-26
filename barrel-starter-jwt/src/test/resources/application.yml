@@ -19,7 +19,7 @@ spring:
 jwt:
   secret: 123456
   permit-urls:
-    - /auth/**
+    - /system/**
     - /test/anonymous
     - /index.html
     - /swagger-ui.html

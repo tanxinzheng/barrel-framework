@@ -52,7 +52,7 @@ public class LoginTest {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername("admin2");
         loginRequest.setPassword("admin123");
-        ResultActions actions = mockMvc.perform(post("/auth/login")
+        ResultActions actions = mockMvc.perform(post("/system/login")
                 .content(JSONObject.toJSONString(loginRequest))
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -68,7 +68,7 @@ public class LoginTest {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername("admin2");
         loginRequest.setPassword("admin123");
-        ResultActions actions = mockMvc.perform(post("/auth/login")
+        ResultActions actions = mockMvc.perform(post("/system/login")
                 .content(JSONObject.toJSONString(loginRequest))
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -84,7 +84,7 @@ public class LoginTest {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername("admin");
         loginRequest.setPassword("111111");
-        ResultActions action = mockMvc.perform(post("/auth/login")
+        ResultActions action = mockMvc.perform(post("/system/login")
                 .content(JSONObject.toJSONString(loginRequest))
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -100,7 +100,7 @@ public class LoginTest {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername("admin");
         loginRequest.setPassword("123456");
-        ResultActions action = mockMvc.perform(post("/auth/login")
+        ResultActions action = mockMvc.perform(post("/system/login")
                 .content(JSONObject.toJSONString(loginRequest))
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -116,7 +116,7 @@ public class LoginTest {
     public void testLogin5() throws Exception {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setPassword("123456");
-        ResultActions action = mockMvc.perform(post("/auth/login")
+        ResultActions action = mockMvc.perform(post("/system/login")
                 .content(JSONObject.toJSONString(loginRequest))
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -128,7 +128,7 @@ public class LoginTest {
 
         loginRequest.setPassword(null);
         loginRequest.setUsername("admin");
-        ResultActions action2 = mockMvc.perform(post("/auth/login")
+        ResultActions action2 = mockMvc.perform(post("/system/login")
                 .content(JSONObject.toJSONString(loginRequest))
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))

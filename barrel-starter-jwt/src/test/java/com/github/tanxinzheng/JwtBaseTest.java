@@ -78,7 +78,7 @@ public class JwtBaseTest {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername(username);
         loginRequest.setPassword("123456");
-        String data = testRestTemplate.postForObject(this.base.toString() + "/auth/login", loginRequest, String.class);
+        String data = testRestTemplate.postForObject(this.base.toString() + "/system/login", loginRequest, String.class);
         Result<LoginResponse> response = JSONObject.parseObject(data, new TypeReference<Result<LoginResponse>>(){});
         return TokenType.BEARER.getCode() + " " + response.getData().getAccessToken();
     }

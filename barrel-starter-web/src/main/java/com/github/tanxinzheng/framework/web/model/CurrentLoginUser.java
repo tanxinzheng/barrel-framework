@@ -1,17 +1,15 @@
 package com.github.tanxinzheng.framework.web.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Set;
 
 @Data
-public class CurrentLoginUser {
+public class CurrentLoginUser implements Serializable {
 
     private String id;
     private String username;
-    @JsonIgnore
-    private String password;
     private String name;
     private String avatar;
     private String email;
