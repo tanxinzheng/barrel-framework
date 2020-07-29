@@ -32,7 +32,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-		<boot.fremework.version>1.0.0-SNAPSHOT</boot.fremework.version>
+		<boot.framework.version>1.0.0-SNAPSHOT</boot.framework.version>
 		<spring.boot.version>2.2.6.RELEASE</spring.boot.version>
 		<spring.cloud.dependencies.version>Hoxton.SR3</spring.cloud.dependencies.version>
 		<spring.cloud.version>2.2.2.RELEASE</spring.cloud.version>
@@ -77,22 +77,22 @@
 			<dependency>
 				<groupId>com.github.tanxinzheng</groupId>
 				<artifactId>barrel-core</artifactId>
-				<version>${boot.fremework.version}</version>
+				<version>${boot.framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.github.tanxinzheng</groupId>
 				<artifactId>barrel-starter-jwt</artifactId>
-				<version>${boot.fremework.version}</version>
+				<version>${boot.framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.github.tanxinzheng</groupId>
 				<artifactId>barrel-starter-web</artifactId>
-				<version>${boot.fremework.version}</version>
+				<version>${boot.framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.github.tanxinzheng</groupId>
 				<artifactId>barrel-starter-mybatis</artifactId>
-				<version>${boot.fremework.version}</version>
+				<version>${boot.framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
