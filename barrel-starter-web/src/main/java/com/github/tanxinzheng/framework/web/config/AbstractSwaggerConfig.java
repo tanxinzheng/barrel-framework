@@ -20,14 +20,14 @@ import java.util.List;
  * 2. http://localhost:8000/v2/api-docs
  *
  */
-@Configuration
-@EnableSwagger2
-public class SwaggerConfig {
+public abstract class AbstractSwaggerConfig {
+
+    public abstract ApiInfo getApiInfo();
 
     @Bean
     public Docket createRestApi(){
         return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
+                .apiInfo(getApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.github.tanxinzheng."))
                 .paths(PathSelectors.any())
@@ -36,17 +36,6 @@ public class SwaggerConfig {
                 .securityContexts(securityContexts());
     }
 
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("基础功能管理平台")
-                .description("基础功能管理平台")
-                .contact(new Contact(
-                        "谭新政",
-                        "http://www.github.com/tanxinzheng",
-                        "tanxinzheng@139.com"))
-                .version("1.0")
-                .build();
-    }
 
     private List<ApiKey> securitySchemes() {
         //设置请求头信息
@@ -59,9 +48,6 @@ public class SwaggerConfig {
     private List<SecurityContext> securityContexts() {
         //设置需要登录认证的路径
         List<SecurityContext> result = new ArrayList<>();
-//        result.add(getContextByPath("/brand/.*"));
-//        result.add(getContextByPath("/product/.*"));
-//        result.add(getContextByPath("/productCategory/.*"));
         return result;
     }
 

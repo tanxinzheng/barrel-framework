@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServletResponse;
  * @Date 2020/6/27
  */
 @Slf4j
-@Order(1)
+@Order(2)
 @ControllerAdvice
-public class CloudExceptionControllerAdvice extends ResponseEntityExceptionHandler {
+public class CloudExceptionControllerAdvice {
 
     @ExceptionHandler(value = {
             FeignException.class
@@ -29,7 +29,7 @@ public class CloudExceptionControllerAdvice extends ResponseEntityExceptionHandl
     ResponseEntity<Object> handleBusinessException(HttpServletRequest request,
                                                    HttpServletResponse response,
                                                    FeignException e){
-        logger.error(e.getMessage(), e);
+        log.error(e.getMessage(), e);
         return ResponseEntity.status(e.status()).body(e.responseBody());
     }
 }

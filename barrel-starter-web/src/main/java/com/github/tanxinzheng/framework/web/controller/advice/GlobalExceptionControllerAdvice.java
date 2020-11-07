@@ -81,7 +81,7 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         logger.debug(ex.getMessage(), ex);
         ErrorResult errorResult = handleBindException(ex.getBindingResult(), ex);
         return ResponseEntity.badRequest().body(errorResult);
@@ -130,7 +130,7 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
         restError.setTimestamp(LocalDateTime.now());
         restError.setSuccess(Boolean.FALSE);
         restError.setMessage("服务器内部异常，请联系管理员，异常事件编号：" + eventNo);
-        restError.setError(exception.getLocalizedMessage());
+        restError.setError(exception.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(restError);
     }
 
