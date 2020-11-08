@@ -3,6 +3,7 @@ package com.github.tanxinzheng.framework.web.json;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.github.tanxinzheng.framework.constant.FormatConstants;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -17,6 +18,6 @@ public class LocalDateTimeSerializer extends JsonSerializer<LocalDateTime> {
 
     @Override
     public void serialize(LocalDateTime value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        gen.writeString(DateTimeFormatter.ISO_DATE_TIME.format(value));
+        gen.writeString(DateTimeFormatter.ofPattern(FormatConstants.ISO_YYYY_MM_DD_HH_MM_SS).toFormat().format(value));
     }
 }
