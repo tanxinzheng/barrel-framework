@@ -23,17 +23,14 @@ public class DefaultFillObjectHandler  implements MetaObjectHandler, Application
         if(currentUserService != null){
             userId = currentUserService.getCurrentUserId();
         }else{
-            userId = "SYSTEM";
+            userId = "ROBOT";
         }
         if (StringUtils.isNotBlank(userId)) {
-            log.info("开始填充创建者CreateUser");
+            log.debug("fill createdBy field:{}, updatedBy field: {}", userId, userId);
             this.setInsertFieldValByName("createdBy", userId, metaObject);
-            log.info("开始填充更新者UpdateUser");
             this.setUpdateFieldValByName("updatedBy", userId, metaObject);
         }
-        log.info("开始填充插入时间InsertTime");
         this.setInsertFieldValByName("createdTime", LocalDateTime.now(), metaObject);
-        log.info("开始填充更新时间UpdateTime");
         this.setUpdateFieldValByName("updatedTime", LocalDateTime.now(), metaObject);
     }
 
@@ -41,10 +38,8 @@ public class DefaultFillObjectHandler  implements MetaObjectHandler, Application
     public void updateFill(MetaObject metaObject) {
         String userId = currentUserService.getCurrentUserId();
         if (StringUtils.isNotBlank(userId)) {
-            log.info("开始填充更新者UpdateUser");
-            this.setUpdateFieldValByName("updatedUserId", LocalDateTime.now(), metaObject);
+            this.setUpdateFieldValByName("updatedBy", LocalDateTime.now(), metaObject);
         }
-        log.info("开始填充更新时间UpdateTime");
         this.setUpdateFieldValByName("updatedTime", LocalDateTime.now(), metaObject);
     }
 

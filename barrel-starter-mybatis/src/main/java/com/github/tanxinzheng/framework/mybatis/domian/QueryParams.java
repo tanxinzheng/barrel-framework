@@ -15,6 +15,7 @@ import java.util.List;
 @Data
 public class QueryParams<T> extends BaseQuery implements Serializable {
 
+
     @ApiModelProperty(value = "查询参数")
     private List<QueryWrapperCondition> conditions;
     @ApiModelProperty(value = "排序参数", hidden = true)
