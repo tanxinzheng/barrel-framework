@@ -67,7 +67,4 @@ public class BaseModel implements Serializable {
         return null;
     }
 
-
-
-
 }
