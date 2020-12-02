@@ -113,6 +113,7 @@ public class JwtConfigProperties {
         this.tokenIdName = DEFAULT_JWT_SESSION_NAME;
         this.expiration = DEFAULT_JWT_EXPIRATION;
         this.permitUrls = new String[]{
+                "/v2/api-docs",
                 "/**.css",
                 "/**.js",
                 "/**/*.css",
