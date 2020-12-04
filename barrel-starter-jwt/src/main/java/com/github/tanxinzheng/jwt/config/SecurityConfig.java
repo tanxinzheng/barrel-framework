@@ -1,6 +1,5 @@
 package com.github.tanxinzheng.jwt.config;
 
-import com.github.tanxinzheng.framework.constant.JwtConfigProperties;
 import com.github.tanxinzheng.jwt.access.JwtAccessDecisionManager;
 import com.github.tanxinzheng.jwt.access.JwtFilterInvocationSecurityMetadataSource;
 import com.github.tanxinzheng.jwt.filter.JwtAuthorizationFilter;

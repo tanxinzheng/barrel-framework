@@ -1,10 +1,8 @@
 package com.github.tanxinzheng.jwt.filter;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.tanxinzheng.framework.constant.JwtConfigProperties;
+import com.github.tanxinzheng.jwt.config.JwtConfigProperties;
 import com.github.tanxinzheng.framework.constant.TokenType;
-import com.github.tanxinzheng.framework.model.BaseResultCode;
 import com.github.tanxinzheng.framework.model.Result;
 import com.github.tanxinzheng.jwt.exception.AuthErrorCode;
 import com.github.tanxinzheng.jwt.support.JwtAuthenticationProvider;

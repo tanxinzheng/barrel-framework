@@ -1,5 +1,6 @@
-package com.github.tanxinzheng.framework.constant;
+package com.github.tanxinzheng.jwt.config;
 
+import com.github.tanxinzheng.framework.constant.TokenType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 

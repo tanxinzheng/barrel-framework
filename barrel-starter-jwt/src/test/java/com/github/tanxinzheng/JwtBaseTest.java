@@ -2,7 +2,7 @@ package com.github.tanxinzheng;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.github.tanxinzheng.framework.constant.JwtConfigProperties;
+import com.github.tanxinzheng.jwt.config.JwtConfigProperties;
 import com.github.tanxinzheng.framework.constant.TokenType;
 import com.github.tanxinzheng.framework.model.Result;
 import com.github.tanxinzheng.jwt.controller.dto.LoginRequest;

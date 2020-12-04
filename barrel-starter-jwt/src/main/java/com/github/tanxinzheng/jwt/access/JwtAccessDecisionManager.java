@@ -1,7 +1,7 @@
 package com.github.tanxinzheng.jwt.access;
 
 import com.alibaba.fastjson.JSONObject;
-import com.github.tanxinzheng.framework.constant.JwtConfigProperties;
+import com.github.tanxinzheng.jwt.config.JwtConfigProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

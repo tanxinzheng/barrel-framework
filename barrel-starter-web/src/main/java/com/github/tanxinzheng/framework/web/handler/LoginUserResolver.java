@@ -1,6 +1,6 @@
 package com.github.tanxinzheng.framework.web.handler;
 
-import com.github.tanxinzheng.framework.constant.JwtConfigProperties;
+import com.github.tanxinzheng.framework.secure.config.SecureProperties;
 import com.github.tanxinzheng.framework.web.annotation.LoginUser;
 import com.github.tanxinzheng.framework.web.model.CurrentLoginUser;
 import org.springframework.core.MethodParameter;
@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 public class LoginUserResolver implements HandlerMethodArgumentResolver {
 
     @Resource
-    JwtConfigProperties jwtConfigProperties;
+    SecureProperties secureProperties;
 
     @Resource
     RedisTemplate redisTemplate;
@@ -35,8 +35,8 @@ public class LoginUserResolver implements HandlerMethodArgumentResolver {
                                             ModelAndViewContainer modelAndViewContainer,
                                             NativeWebRequest nativeWebRequest,
                                             WebDataBinderFactory webDataBinderFactory) throws Exception {
-        String token = nativeWebRequest.getHeader(jwtConfigProperties.getTokenHeaderName());
-        CurrentLoginUser currentLoginUser = (CurrentLoginUser) redisTemplate.opsForValue().get(jwtConfigProperties.getTokenHeaderName() + ":" + token);
+        String token = nativeWebRequest.getHeader(secureProperties.getTokenHeaderName());
+        CurrentLoginUser currentLoginUser = (CurrentLoginUser) redisTemplate.opsForValue().get(secureProperties.getTokenHeaderName() + ":" + token);
         return currentLoginUser;
     }
 }
