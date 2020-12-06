@@ -94,7 +94,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         builder.featuresToDisable(
                 SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS,
                 DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES,
-                DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
+                DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+                SerializationFeature.FAIL_ON_EMPTY_BEANS
         );
         builder.featuresToEnable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
         builder.annotationIntrospector(getDictionaryIntrospector());
