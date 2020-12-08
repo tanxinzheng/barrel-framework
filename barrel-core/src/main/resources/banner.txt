@@ -1,0 +1,12 @@
+
+-------------------------------------- Environment --------------------------------------------
+${AnsiColor.BLUE}:: Spring Boot Version              :: ${AnsiColor.RED} ${spring-boot.version}
+${AnsiColor.BLUE}:: Spring Barrel Framework Version  :: ${AnsiColor.RED} ${boot.framework.version}
+${AnsiColor.BLUE}:: Application Name                 :: ${AnsiColor.RED} ${spring.application.name}
+${AnsiColor.BLUE}:: Server Port                      :: ${AnsiColor.RED} ${server.port}
+${AnsiColor.BLUE}:: Server Context Path              :: ${AnsiColor.RED} ${server.servlet.context-path:/}
+${AnsiColor.BLUE}:: Spring Profiles Active           :: ${AnsiColor.RED} ${spring.profiles.active}
+-----------------------------------------------------------------------------------------------
+${AnsiColor.DEFAULT}
+
+
