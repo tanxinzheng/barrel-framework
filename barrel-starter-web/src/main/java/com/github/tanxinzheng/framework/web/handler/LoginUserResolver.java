@@ -1,8 +1,10 @@
 package com.github.tanxinzheng.framework.web.handler;
 
 import com.github.tanxinzheng.framework.secure.config.SecureProperties;
+import com.github.tanxinzheng.framework.utils.AssertValid;
 import com.github.tanxinzheng.framework.web.annotation.LoginUser;
 import com.github.tanxinzheng.framework.web.model.CurrentLoginUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,7 @@ import javax.annotation.Resource;
 /**
  * 解析@LoginUser注解参数，当前登录用户信息
  */
+@Slf4j
 @Component
 public class LoginUserResolver implements HandlerMethodArgumentResolver {
 
@@ -36,7 +39,10 @@ public class LoginUserResolver implements HandlerMethodArgumentResolver {
                                             NativeWebRequest nativeWebRequest,
                                             WebDataBinderFactory webDataBinderFactory) throws Exception {
         String token = nativeWebRequest.getHeader(secureProperties.getTokenHeaderName());
-        CurrentLoginUser currentLoginUser = (CurrentLoginUser) redisTemplate.opsForValue().get(secureProperties.getTokenHeaderName() + ":" + token);
+        String tokenKey = secureProperties.getTokenHeaderName() + ":" + token;
+        log.info("the request token key:{} ", tokenKey);
+        CurrentLoginUser currentLoginUser = (CurrentLoginUser) redisTemplate.opsForValue().get(tokenKey);
+        AssertValid.notNull(currentLoginUser, "该接口访问受限，请登录后再访问。");
         return currentLoginUser;
     }
 }
