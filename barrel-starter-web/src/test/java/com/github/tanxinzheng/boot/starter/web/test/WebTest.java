@@ -86,18 +86,19 @@ public class WebTest {
     @Test
     public void testDictionaryTransfer() throws Exception {
         ResultActions actions = mockMvc.perform(get("/test/dictionary")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andDo(print());
+//                .andExpect(status().isOk());
         String resultJson = actions.andReturn().getResponse().getContentAsString();
-        JSONArray jsonArray = JSONArray.parseArray(resultJson);
-        org.springframework.util.Assert.notEmpty(jsonArray, "测试不通过");
-        org.springframework.util.Assert.isTrue(jsonArray.getJSONObject(0).get("sexDesc").equals("女"), "测试不通过");
-        org.springframework.util.Assert.isTrue(jsonArray.getJSONObject(1).get("sexDesc").equals("男"), "测试不通过");
-        org.springframework.util.Assert.isTrue(jsonArray.getJSONObject(0).get("disableName").equals("启用"), "测试不通过");
-        org.springframework.util.Assert.isTrue(jsonArray.getJSONObject(1).get("disableName").equals("禁用"), "测试不通过");
-        org.springframework.util.Assert.isTrue(jsonArray.getJSONObject(0).getJSONObject("userIdDetail").get("userName").equals("管理员"), "测试不通过");
+        JSONObject jsonObject = JSONObject.parseObject(resultJson);
+        Assert.assertNotEquals(jsonObject, "测试不通过");
+        JSONArray jsonArray = jsonObject.getJSONArray("data");
+        Assert.assertTrue(jsonArray.getJSONObject(0).get("sexDesc").equals("女"));
+        Assert.assertTrue(jsonArray.getJSONObject(1).get("sexDesc").equals("男"));
+        Assert.assertTrue(jsonArray.getJSONObject(0).get("disableName").equals("启用"));
+        Assert.assertTrue(jsonArray.getJSONObject(1).get("disableName").equals("禁用"));
+        Assert.assertTrue(jsonArray.getJSONObject(0).getJSONObject("userIdDetail").get("userName").equals("管理员"));
     }
 
 }

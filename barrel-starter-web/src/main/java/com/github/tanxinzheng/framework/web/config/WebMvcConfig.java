@@ -2,6 +2,7 @@ package com.github.tanxinzheng.framework.web.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.github.tanxinzheng.framework.web.annotation.AccountField;
@@ -16,6 +17,7 @@ import com.github.tanxinzheng.framework.web.json.LocalDateTimeDeserialize;
 import com.github.tanxinzheng.framework.web.json.LocalDateTimeSerializer;
 import com.github.tanxinzheng.framework.web.support.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -82,6 +84,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     }
 
     @Bean
+    @Qualifier(value = "objectMapper")
     @Primary
     public ObjectMapper objectMapper() {
         Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
@@ -99,7 +102,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         );
         builder.featuresToEnable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
         builder.annotationIntrospector(getDictionaryIntrospector());
-        return builder.build();
+        ObjectMapper objectMapper = builder.build();
+        return objectMapper;
     }
 
     @Bean
@@ -136,7 +140,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
-        registry.enableContentNegotiation(false, new MappingJackson2JsonView());
+        registry.enableContentNegotiation(false, new MappingJackson2JsonView(objectMapper()));
     }
 
     @Bean

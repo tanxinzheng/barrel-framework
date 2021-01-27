@@ -38,6 +38,7 @@
 		<spring.cloud.version>2.2.2.RELEASE</spring.cloud.version>
 		<alibaba.cloud.version>2.2.1.RELEASE</alibaba.cloud.version>
 		<io.springfox.version>2.9.2</io.springfox.version>
+		<mybatis-plus.version>3.2.0</mybatis-plus.version>
 		<skipNpmBuild>false</skipNpmBuild>
 <!--		<skipTests>false</skipTests>-->
 	</properties>
@@ -151,8 +152,13 @@
 			</dependency>
 			<dependency>
 				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-core</artifactId>
+				<version>3.3.1</version>
+			</dependency>
+			<dependency>
+				<groupId>com.baomidou</groupId>
 				<artifactId>mybatis-plus-boot-starter</artifactId>
-				<version>3.2.0</version>
+				<version>${mybatis-plus.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.alibaba</groupId>

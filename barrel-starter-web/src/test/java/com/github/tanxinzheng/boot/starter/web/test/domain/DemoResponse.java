@@ -10,8 +10,8 @@ public class DemoResponse {
     private String id;
     @AccountField
     private String userId;
-    @DictionaryTransfer(index = "SEX")
+    @DictionaryTransfer(type = "SEX")
     private String sex;
-    @DictionaryTransfer(index = "DISABLE", fieldName = "disableName")
+    @DictionaryTransfer(type = "DISABLE", fieldName = "disableName")
     private String disable;
 }

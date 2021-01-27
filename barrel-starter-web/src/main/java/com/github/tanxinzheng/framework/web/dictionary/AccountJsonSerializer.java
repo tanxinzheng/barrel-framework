@@ -38,7 +38,7 @@ public class AccountJsonSerializer extends JsonSerializer<Object> {
                 return;
             }
             String currentName = jsonGenerator.getOutputContext().getCurrentName();
-            // TODO 此处需要根据业务场景进行定制，默认1场景q
+            // TODO 此处需要根据业务场景进行定制，默认1场景
             // 1. 传统后台型，用户数量较少时，可直接查询所有用户的信息缓存至redis数据库中，可提高性能。
             // 2. 电商平台型，用户数量较多时，可通过单次查找通过userId进行缓存。
             Object dictionaryLabel = accountInterpreterService.translateAccount((String) value);
@@ -49,8 +49,7 @@ public class AccountJsonSerializer extends JsonSerializer<Object> {
             if(dictionaryLabel instanceof String){
                 jsonGenerator.writeStringField(fieldName, (String) dictionaryLabel);
             }else if(dictionaryLabel instanceof Map){
-                Object val = ((Map) dictionaryLabel).get(value);
-                jsonGenerator.writeObjectField(fieldName, val);
+                jsonGenerator.writeObjectField(fieldName, dictionaryLabel);
             }else{
                 jsonGenerator.writeObjectField(fieldName, dictionaryLabel);
             }

@@ -12,17 +12,25 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface DictionaryTransfer {
 
+    public static final String DICT_SERVICE_TYPE = "DICT_INFO";
+
     /**
      * 字典类型
      * @return
      */
-    String index();
+    String type();
 
     /**
      * 字段名称
      * @return
      */
     String fieldName() default "";
+
+    /**
+     * 类型
+     * @return
+     */
+    String serviceType() default DictionaryTransfer.DICT_SERVICE_TYPE;
 
     /**
      * 输出格式
