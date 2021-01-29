@@ -59,12 +59,4 @@ public class BaseModel implements Serializable {
         this.dataVersion = dataVersion;
     }
 
-    public <T> T toDO(Class<T> clazz){
-        return null;
-    }
-
-    public <T> T toVO(Class<T> clazz){
-        return null;
-    }
-
 }
