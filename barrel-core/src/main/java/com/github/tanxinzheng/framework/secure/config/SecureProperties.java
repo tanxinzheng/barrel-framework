@@ -36,10 +36,6 @@ public class SecureProperties {
      * 匿名可访问URL
      */
     private String[] ignoreUrls;
-    /**
-     * 是否启用验证码
-     */
-    private boolean enableCaptchaCheck;
 
     public SecureProperties() {
         this.expiration = DEFAULT_TOKEN_EXPIRATION;
@@ -96,11 +92,4 @@ public class SecureProperties {
         this.ignoreUrls = ignoreUrls;
     }
 
-    public boolean isEnableCaptchaCheck() {
-        return enableCaptchaCheck;
-    }
-
-    public void setEnableCaptchaCheck(boolean enableCaptchaCheck) {
-        this.enableCaptchaCheck = enableCaptchaCheck;
-    }
 }

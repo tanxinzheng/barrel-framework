@@ -1,5 +1,6 @@
 package com.github.tanxinzheng.framework.secure.domain;
 
+import com.github.tanxinzheng.framework.model.TreeNode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -31,4 +32,6 @@ public class AuthUser implements Serializable {
     private String avatar = "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png";
     @ApiModelProperty(value = "所属角色组")
     private List<String> roles;
+    @ApiModelProperty(value = "拥有的菜单")
+    private List<TreeNode> menus;
 }

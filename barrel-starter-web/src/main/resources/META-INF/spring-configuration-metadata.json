@@ -1,0 +1,29 @@
+{
+  "groups": [
+    {
+      "name": "barrel.web",
+      "type": "com.github.tanxinzheng.framework.web.config.WebProperties",
+      "sourceType": "com.github.tanxinzheng.framework.web.config.WebProperties"
+    },
+    {
+      "name": "barrel.web.verification",
+      "type": "com.github.tanxinzheng.framework.web.config.WebProperties$Verification",
+      "sourceType": "com.github.tanxinzheng.framework.web.config.WebProperties",
+      "sourceMethod": "getVerification()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "barrel.web.verification.enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.github.tanxinzheng.framework.web.config.WebProperties$Verification",
+      "defaultValue": false
+    },
+    {
+      "name": "barrel.web.verification.type",
+      "type": "com.github.tanxinzheng.framework.web.model.VerificationTypeEnum",
+      "sourceType": "com.github.tanxinzheng.framework.web.config.WebProperties$Verification"
+    }
+  ],
+  "hints": []
+}
